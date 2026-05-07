@@ -1,17 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap');
 
 * {
   box-sizing: border-box;
 }
 
-/* === БОРДОВАЯ ЦВЕТОВАЯ ПАЛИТРА === */
+/* === ТАКТИЧЕСКАЯ БОРДОВАЯ ПАЛИТРА === */
 :root {
-  --bg-1: #0a0508;
-  --bg-2: #140a10;
-  --text: #f5f0f2;
-  --muted: #a8949c;
-  --glow: 0 0 30px rgba(159, 18, 57, 0.15);
+  --bg-dark: #070305;
+  --bg-panel: #11070b;
+  --bg-block: #17090f;
+  --primary: #be123c; /* Агрессивный бордовый */
+  --primary-dark: #4c0519;
+  --text-main: #f5f0f2;
+  --text-muted: #9e8a93;
+  --accent-glow: 0 0 15px rgba(190, 18, 60, 0.4);
 }
 
 html {
@@ -21,9 +24,9 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: Inter, Arial, sans-serif;
-  color: var(--text);
-  background-color: var(--bg-1);
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-dark);
   background-attachment: fixed; 
   overflow-x: hidden; 
 }
@@ -32,33 +35,25 @@ body.locked {
   overflow: hidden;
 }
 
-/* Фоновая картинка (Заглушка) */
+/* === ТАКТИЧЕСКАЯ СЕТКА НА ФОНЕ === */
 body::before {
   content: '';
   position: fixed;
-  top: -30px;
-  left: -30px;
-  width: calc(100vw + 60px);
-  height: calc(100vh + 60px);
-  background-image: url('https://placehold.co/1920x1080/0a0508/0a0508');
-  background-size: cover;
-  background-position: center;
-  filter: blur(0px) brightness(0.4); 
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background-image: 
+    linear-gradient(rgba(190, 18, 60, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(190, 18, 60, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center center;
   z-index: -2;
 }
 
-/* Бордовый градиент поверх фона */
+/* Затемнение по краям (Виньетка) */
 body::after {
   content: '';
   position: fixed;
-  top: 0; 
-  left: 0; 
-  width: 100vw; 
-  height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(159, 18, 57, 0.25) 0%, transparent 45%),
-    radial-gradient(circle at bottom right, rgba(136, 19, 55, 0.15) 0%, transparent 40%),
-    linear-gradient(180deg, rgba(10, 5, 8, 0.6), rgba(20, 10, 16, 0.8));
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: radial-gradient(circle at center, transparent 30%, var(--bg-dark) 100%);
   z-index: -1;
   pointer-events: none;
 }
@@ -80,4 +75,558 @@ body::after {
   top: 0;
   z-index: 20;
   padding-top: 6px;
-  margin-bottom: 20
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(-25px);
+  pointer-events: none;
+  transition: 0.5s ease;
+}
+
+.topbar.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.topbar-inner {
+  display: flex;
+  justify-content: center;
+  gap: 0; /* Убрали отступы между кнопками для монолитности */
+  padding: 4px;
+  background: var(--bg-panel);
+  border: 1px solid var(--primary-dark);
+  border-radius: 4px; /* Острые углы */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.hero {
+  height: 85vh; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: height 0.6s ease, min-height 0.6s ease, padding 0.6s ease;
+}
+
+.hero.compact {
+  height: 0;
+  min-height: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  overflow: hidden;
+}
+
+.center-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  transition: 0.6s ease;
+}
+
+.intro {
+  text-align: center;
+  transition: 0.4s ease;
+}
+
+.intro.hide {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+.intro h1 {
+  margin: 0 0 10px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  text-shadow: 2px 2px 0px var(--primary), -2px -2px 0px rgba(0,0,0,0.8);
+}
+
+.intro p {
+  margin: 0;
+  color: var(--primary);
+  font-family: monospace;
+  font-size: 16px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.tabs-start {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  transition: transform 0.7s ease, opacity 0.45s ease;
+}
+
+.tabs-start.fly-up {
+  transform: translateY(-80px) scale(0.92);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* === КНОПКИ (ТАКТИЧЕСКИЕ) === */
+.tab-btn {
+  border: 1px solid var(--primary-dark);
+  background: var(--bg-block);
+  color: var(--text-muted);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+}
+
+.tab-btn.large {
+  min-width: 180px;
+  padding: 24px 34px;
+  font-size: 42px;
+  letter-spacing: 0.1em;
+  border-bottom: 4px solid var(--primary-dark);
+}
+
+.tab-btn.small {
+  min-width: 84px;
+  padding: 10px 18px;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+}
+
+.tab-btn:hover {
+  background: #250f17;
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.tab-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  border-bottom: 4px solid #fff;
+  box-shadow: var(--accent-glow);
+}
+
+.topbar-inner .tab-btn.active {
+  border-bottom: none;
+}
+
+.content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.45s ease;
+  pointer-events: none;
+  display: none; 
+  flex-grow: 1; 
+}
+
+.content.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  animation: fadeInContent 0.6s ease forwards;
+}
+
+@keyframes fadeInContent {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === ГЛАВНАЯ ПАНЕЛЬ (МОНОЛИТ) === */
+.panel {
+  border: 1px solid var(--primary-dark);
+  border-top: 4px solid var(--primary);
+  background: var(--bg-panel);
+  border-radius: 4px;
+  padding: 32px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+  position: relative;
+}
+
+/* Декоративные уголки у главной панели */
+.panel::before, .panel::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  width: 15px;
+  height: 15px;
+  border-bottom: 2px solid var(--primary);
+}
+.panel::before { left: -1px; border-left: 2px solid var(--primary); }
+.panel::after { right: -1px; border-right: 2px solid var(--primary); }
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed var(--primary-dark);
+}
+
+.panel-title {
+  margin: 0;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.panel-title::before {
+  content: '// ';
+  color: var(--primary);
+}
+
+.panel-mark {
+  color: var(--primary);
+  font-family: monospace;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.panel-mark::before { content: '['; margin-right: 5px; color: var(--text-muted); }
+.panel-mark::after { content: ']'; margin-left: 5px; color: var(--text-muted); }
+
+.tab-panel {
+  display: none;
+  animation: fadeIn 0.35s ease;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === ПОД-МОДУЛИ (СТРОГИЕ БЛОКИ) === */
+.sub-section {
+  scroll-margin-top: 100px;
+  margin-bottom: 28px;
+}
+.sub-section:last-child { margin-bottom: 0; }
+
+.sub-panel {
+  border: 1px solid var(--primary-dark);
+  background: var(--bg-block);
+  border-radius: 2px;
+  padding: 24px;
+}
+
+.sub-section-title {
+  margin: 0 0 20px 0;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 24px;
+  color: var(--text-main);
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sub-section-title::before {
+  content: '';
+  display: block;
+  width: 12px;
+  height: 12px;
+  background-color: var(--primary);
+}
+
+/* === ФОТО === */
+.sub-image-wrapper {
+  width: 100%;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  border: 1px solid var(--primary-dark);
+  position: relative;
+}
+
+/* Рамки прицела на картинках */
+.sub-image-wrapper::before, .sub-image-wrapper::after {
+  content: ''; position: absolute; width: 20px; height: 20px; z-index: 2; pointer-events: none;
+}
+.sub-image-wrapper::before { top: 10px; left: 10px; border-top: 2px solid var(--primary); border-left: 2px solid var(--primary); }
+.sub-image-wrapper::after { bottom: 10px; right: 10px; border-bottom: 2px solid var(--primary); border-right: 2px solid var(--primary); }
+
+.sub-image {
+  width: 100%;
+  height: 350px; 
+  object-fit: cover;
+  display: block;
+  filter: grayscale(30%) contrast(110%);
+  transition: filter 0.4s ease;
+  cursor: zoom-in; 
+}
+
+.sub-image-wrapper:hover .sub-image {
+  filter: grayscale(0%) contrast(100%);
+}
+
+/* === ВНУТРЕННИЕ БЛОКИ С ТЕКСТОМ === */
+.faction-block {
+  background: rgba(190, 18, 60, 0.02); 
+  border-radius: 2px;
+  padding: 24px;
+  border: 1px solid var(--primary-dark);
+  border-left: 4px solid var(--primary); /* Жирная линия слева */
+  position: relative;
+}
+
+.faction-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+/* Убрали старую вертикальную палочку, сделали тактический квадрат */
+.faction-title::before {
+  content: '■';
+  color: var(--primary);
+  font-size: 14px;
+  margin-right: 12px;
+}
+
+.faction-lead {
+  font-size: 15px;
+  color: #d1c1c8;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  font-weight: 500;
+  padding: 16px 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px dashed var(--primary-dark);
+  border-radius: 2px;
+}
+
+.faction-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.faction-list li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 16px;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ТАКТИЧЕСКИЙ МАРКЕР СПИСКА */
+.faction-list li::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--primary);
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.nested-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 10px; 
+}
+
+.nested-list li {
+  padding-left: 20px;
+  margin-bottom: 8px;
+}
+
+.faction-list .nested-list li::before {
+  content: '-';
+  color: var(--primary-dark);
+}
+
+.code-green { color: #4ade80; font-weight: 700; background: rgba(74, 222, 128, 0.1); padding: 2px 6px; border-radius: 2px; }
+.code-yellow { color: #facc15; font-weight: 700; background: rgba(250, 204, 21, 0.1); padding: 2px 6px; border-radius: 2px; }
+.code-red { color: #f87171; font-weight: 700; background: rgba(248, 113, 113, 0.1); padding: 2px 6px; border-radius: 2px; }
+
+/* === БОКОВОЕ МЕНЮ === */
+.side-nav {
+  position: fixed;
+  right: 12px;
+  top: 50%;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transform: translateY(-50%) translateX(150px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.2), opacity 0.4s ease;
+}
+
+.side-nav.show {
+  transform: translateY(-50%) translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.side-nav .tab-btn.small {
+  min-width: 50px;
+  padding: 8px 0;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 2px;
+  background: var(--bg-panel);
+  border: 1px solid var(--primary-dark);
+}
+.side-nav .tab-btn.small.active {
+  border-right: 4px solid #fff;
+  border-bottom: 1px solid var(--primary);
+}
+
+/* === ДОПЫ И АВТОРСКАЯ ПОДПИСЬ === */
+.content-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+  margin-top: 0; 
+  transform: translateY(-30px);
+  animation: fadeIn 0.8s ease;
+  position: relative;
+}
+
+.header-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  text-shadow: 2px 2px 0px var(--primary);
+  margin: 0 0 4px 0;
+}
+
+.header-author-wrap {
+  position: relative; 
+  display: inline-block;
+  background: var(--primary-dark);
+  padding: 4px 16px;
+  border-radius: 2px;
+}
+
+.by-text {
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 0.3em; 
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.signature {
+  font-family: 'Great Vibes', cursive; 
+  font-size: 34px; 
+  color: #fff; 
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); 
+  position: absolute;
+  right: -50px; 
+  bottom: -30px; 
+  transform: rotate(-10deg); 
+  pointer-events: none;
+}
+
+/* === ФУТЕР === */
+.footer {
+  margin-top: 60px;
+  padding: 30px;
+  border: 1px solid var(--primary-dark);
+  background: var(--bg-panel);
+  border-radius: 2px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  display: none; 
+}
+
+.content.show ~ .footer {
+  display: flex;
+  animation: fadeInContent 0.8s ease forwards;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.footer-links a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.footer-links a:hover { color: #fff; text-shadow: var(--accent-glow); }
+
+.footer-highlight { color: #fff; font-weight: 700; }
+
+/* === ЛАЙТБОКС === */
+.lightbox {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(7, 3, 5, 0.95);
+  z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+  opacity: 1; pointer-events: auto; cursor: zoom-out; 
+}
+
+.lightbox img {
+  max-width: 90vw; max-height: 90vh;
+  border: 2px solid var(--primary);
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.lightbox.active img { transform: scale(1); }
+
+@media (max-width: 1400px) { .side-nav { right: 8px; } }
+@media (max-width: 900px) {
+  .intro h1 { font-size: 42px; }
+  .tab-btn.large { min-width: 140px; font-size: 32px; padding: 24px 26px; }
+  .side-nav { display: none; }
+}
+@media (max-width: 640px) {
+  .site { padding-left: 14px; padding-right: 14px; }
+  .intro h1 { font-size: 34px; }
+  .tabs-start { width: 100%; flex-direction: column; }
+  .tab-btn.large, .tab-btn.small { width: 100%; }
+  .topbar-inner { width: 100%; border-radius: 4px; flex-wrap: wrap; }
+  .footer-links { flex-direction: column; gap: 12px; }
+}
