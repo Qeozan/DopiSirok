@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+/* === БОРДОВАЯ ЦВЕТОВАЯ ПАЛИТРА === */
+:root {
+  --bg-1: #0a0508;
+  --bg-2: #140a10;
+  --text: #f5f0f2;
+  --muted: #a8949c;
+  --glow: 0 0 30px rgba(159, 18, 57, 0.15);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, Arial, sans-serif;
+  color: var(--text);
+  background-color: var(--bg-1);
+  background-attachment: fixed; 
+  overflow-x: hidden; 
+}
+
+body.locked {
+  overflow: hidden;
+}
+
+/* Фоновая картинка (Заглушка) */
+body::before {
+  content: '';
+  position: fixed;
+  top: -30px;
+  left: -30px;
+  width: calc(100vw + 60px);
+  height: calc(100vh + 60px);
+  background-image: url('https://placehold.co/1920x1080/0a0508/0a0508');
+  background-size: cover;
+  background-position: center;
+  filter: blur(0px) brightness(0.4); 
+  z-index: -2;
+}
+
+/* Бордовый градиент поверх фона */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  width: 100vw; 
+  height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(159, 18, 57, 0.25) 0%, transparent 45%),
+    radial-gradient(circle at bottom right, rgba(136, 19, 55, 0.15) 0%, transparent 40%),
+    linear-gradient(180deg, rgba(10, 5, 8, 0.6), rgba(20, 10, 16, 0.8));
+  z-index: -1;
+  pointer-events: none;
+}
+
+.site {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* === ВЕРХНЕЕ МЕНЮ === */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding-top: 6px;
+  margin-bottom: 20
