@@ -12,19 +12,19 @@
     }
 
     :root {
-      /* Основной фон (почти черный с едва уловимым красным подтоном) */
+      /* Основной фон */
       --bg-1: #050102;
       --text: #f5f0f2;
       --muted: #a39195;
       
-      /* Настоящий глубокий бордовый без розового */
+      /* Глубокий бордовый */
       --accent: #8a031d; 
-      --accent-light: #b30022; /* Для акцентного текста */
+      --accent-light: #b30022;
       
       /* Настройки iPhone Glassmorphism */
       --glass-bg: linear-gradient(145deg, rgba(30, 2, 8, 0.45) 0%, rgba(5, 0, 2, 0.7) 100%);
       --glass-border: rgba(255, 255, 255, 0.05);
-      --glass-border-top: rgba(255, 255, 255, 0.12); /* Блик на верхней грани стекла */
+      --glass-border-top: rgba(255, 255, 255, 0.12);
       --hover-border: rgba(180, 0, 30, 0.4);
       
       /* Мягкие, глубокие тени */
@@ -46,28 +46,29 @@
       overflow-x: hidden; 
     }
 
-    /* Фоновая картинка с сильным затемнением */
+    /* Фоновая картинка - Топографическая карта */
     body::before {
       content: '';
       position: fixed;
-      top: -30px; left: -30px;
-      width: calc(100vw + 60px); height: calc(100vh + 60px);
-      background-image: url('https://placehold.co/1920x1080/050102/050102');
-      background-size: cover;
-      background-position: center;
-      filter: blur(8px) brightness(0.2); 
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #050102; 
+      /* Железобетонная ссылка на текстуру */
+      background-image: url('https://raw.githubusercontent.com/subtlepatterns/SubtlePatterns/master/topography.png');
+      background-repeat: repeat;
+      /* Инвертируем черные линии в белые и делаем полупрозрачными */
+      filter: invert(1) opacity(0.12);
       z-index: -2;
+      pointer-events: none;
     }
 
-    /* Черно-бордовый градиент поверх фона */
+    /* Мягкий бордовый градиент и виньетка поверх карты */
     body::after {
       content: '';
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
       background:
-        radial-gradient(circle at top left, rgba(90, 0, 20, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at bottom right, rgba(50, 0, 10, 0.25) 0%, transparent 50%),
-        linear-gradient(180deg, rgba(5, 1, 2, 0.6), rgba(10, 1, 3, 0.9));
+        radial-gradient(circle at center, rgba(138, 3, 29, 0.15) 0%, transparent 60%),
+        linear-gradient(180deg, rgba(5, 1, 2, 0.2), rgba(10, 1, 3, 0.85));
       z-index: -1;
       pointer-events: none;
     }
@@ -129,9 +130,9 @@
     .glass-panel {
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
-      border-top: 1px solid var(--glass-border-top); /* Светлый блик сверху */
+      border-top: 1px solid var(--glass-border-top); 
       border-radius: 28px;
-      backdrop-filter: blur(30px) saturate(130%); /* Сильное размытие и насыщенность как в iOS */
+      backdrop-filter: blur(30px) saturate(130%); 
       -webkit-backdrop-filter: blur(30px) saturate(130%);
       box-shadow: var(--soft-shadow);
     }
@@ -594,25 +595,21 @@
 
     // Переход к конкретному вопросу
     function openQuestion(num) {
-      clearInterval(timer); // Останавливаем таймер, если кликнули вручную
+      clearInterval(timer); 
       
-      // Скрываем главный экран
       heroView.classList.add('hide');
       setTimeout(() => {
         heroView.style.display = 'none';
         
-        // Показываем детальный вид
         detailView.style.display = 'block';
         
-        // Прячем все вопросы и показываем нужный
         allQuestions.forEach(q => q.style.display = 'none');
         document.getElementById('q' + num).style.display = 'block';
         
-        // Запускаем анимацию появления
         setTimeout(() => detailView.classList.add('active'), 50);
         
         window.scrollTo({ top: 0, behavior: "smooth" });
-      }, 500); // Ждем окончания анимации скрытия heroView
+      }, 500); 
     }
 
     // Возврат на главный экран
@@ -625,7 +622,6 @@
         heroView.style.display = 'flex';
         setTimeout(() => heroView.classList.remove('hide'), 50);
         
-        // Перезапуск таймера
         timeLeft = 20;
         timerText.innerHTML = `Переход к первому вопросу через: <b>${timeLeft}</b> сек`;
         startTimer();
@@ -633,7 +629,6 @@
       }, 500);
     }
 
-    // Инициализация при старте
     window.onload = startTimer;
   </script>
 </body>
