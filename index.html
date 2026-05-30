@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Шаблон: Ответы на вопросы</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 
     * {
@@ -14,12 +13,18 @@
 
     :root {
       --bg-1: #0a0508;
-      --bg-2: #140a10;
       --text: #f5f0f2;
       --muted: #a8949c;
-      --accent: #9f1239; /* Бордовый акцент */
-      --glow: 0 0 30px rgba(159, 18, 57, 0.3);
-      --accent-glow: 0 0 20px rgba(159, 18, 57, 0.6);
+      --accent: #9f1239; /* Глубокий бордовый */
+      
+      /* Переменные для эффекта бордового стекла */
+      --glass-bg: rgba(45, 10, 20, 0.4); 
+      --glass-border: rgba(159, 18, 57, 0.25);
+      --hover-border: rgba(159, 18, 57, 0.6);
+      
+      /* Мягкие тени вместо резкого свечения */
+      --soft-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      --hover-glow: 0 8px 25px rgba(159, 18, 57, 0.25); 
     }
 
     html {
@@ -36,7 +41,7 @@
       overflow-x: hidden; 
     }
 
-    /* Фоновая картинка и градиент */
+    /* Фоновая картинка с бордовым затемнением */
     body::before {
       content: '';
       position: fixed;
@@ -45,18 +50,19 @@
       background-image: url('https://placehold.co/1920x1080/0a0508/0a0508');
       background-size: cover;
       background-position: center;
-      filter: blur(0px) brightness(0.4); 
+      filter: blur(5px) brightness(0.3); 
       z-index: -2;
     }
 
+    /* Мягкий градиент поверх фона */
     body::after {
       content: '';
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
       background:
-        radial-gradient(circle at top left, rgba(159, 18, 57, 0.25) 0%, transparent 45%),
-        radial-gradient(circle at bottom right, rgba(136, 19, 55, 0.15) 0%, transparent 40%),
-        linear-gradient(180deg, rgba(10, 5, 8, 0.7), rgba(20, 10, 16, 0.9));
+        radial-gradient(circle at top left, rgba(159, 18, 57, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at bottom right, rgba(136, 19, 55, 0.1) 0%, transparent 50%),
+        linear-gradient(180deg, rgba(10, 5, 8, 0.4), rgba(20, 10, 16, 0.8));
       z-index: -1;
       pointer-events: none;
     }
@@ -102,7 +108,7 @@
     }
 
     .main-title span {
-      color: var(--accent);
+      color: #ff4d79; /* Чуть более светлый акцент для текста */
     }
 
     .cards-wrapper {
@@ -113,41 +119,46 @@
       width: 100%;
     }
 
+    /* Стеклянные карточки */
     .card {
       flex: 1;
       min-width: 300px;
       max-width: 380px;
-      background: rgba(20, 10, 16, 0.6);
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px; /* Добавлено скругление */
-      backdrop-filter: blur(15px);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: var(--soft-shadow);
       cursor: pointer;
-      transition: all 0.3s ease;
+      overflow: hidden; /* Чтобы шапка не вылезала за скругления */
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       display: flex;
       flex-direction: column;
     }
 
     .card:hover {
-      border-color: var(--accent);
-      transform: translateY(-5px);
-      box-shadow: var(--accent-glow);
+      border-color: var(--hover-border);
+      transform: translateY(-6px);
+      box-shadow: var(--hover-glow);
+      background: rgba(60, 15, 25, 0.5); /* Чуть светлее при наведении */
     }
 
+    /* Шапка карточки по фото */
     .card-header {
       background: var(--accent);
-      color: #ffffff; /* Изменено на белый для бордового фона */
+      color: #ffffff;
       font-weight: 800;
       text-align: center;
-      padding: 15px;
+      padding: 18px 20px;
       font-size: 18px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      border-top-left-radius: 16px; /* Скругление внутренних углов шапки */
-      border-top-right-radius: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .card-body {
-      padding: 20px;
+      padding: 25px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -158,8 +169,9 @@
       width: 120px;
       height: 120px;
       object-fit: cover;
-      border-radius: 16px; /* Скругление картинок */
-      border: 2px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
     .card-list {
@@ -181,7 +193,7 @@
       content: '■';
       position: absolute;
       left: 0;
-      color: var(--accent);
+      color: #ff4d79;
       font-size: 10px;
       top: 2px;
     }
@@ -205,21 +217,23 @@
 
     .download-btn {
       background: var(--accent);
-      color: #ffffff; /* Изменено на белый */
-      border: none;
-      border-radius: 12px; /* Добавлено скругление кнопки */
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
       padding: 15px 40px;
       font-size: 16px;
       font-weight: 700;
       text-transform: uppercase;
       cursor: pointer;
-      transition: 0.3s;
+      transition: all 0.3s ease;
       letter-spacing: 0.1em;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
     .download-btn:hover {
       background: #be123c;
-      box-shadow: var(--accent-glow);
+      transform: translateY(-2px);
+      box-shadow: var(--hover-glow);
     }
 
     /* === ЭКРАН 2: ДЕТАЛЬНЫЙ ВОПРОС === */
@@ -270,20 +284,29 @@
       align-items: center;
     }
 
+    /* Стеклянные колонки */
     .detail-col {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 20px; /* Скругление колонок */
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
       padding: 30px;
       height: 100%;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: var(--soft-shadow);
+      transition: border-color 0.4s ease;
+    }
+
+    .detail-col:hover {
+      border-color: var(--hover-border);
     }
 
     .detail-col h3 {
-      color: var(--accent);
+      color: #ff4d79;
       font-size: 20px;
       margin-top: 0;
       text-transform: uppercase;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid var(--glass-border);
       padding-bottom: 15px;
     }
 
@@ -297,9 +320,9 @@
       width: 300px;
       height: 350px;
       object-fit: cover;
-      border-radius: 20px; /* Скругление главного фото */
-      border: 2px solid var(--accent);
-      box-shadow: var(--glow);
+      border-radius: 24px;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--soft-shadow);
     }
 
     .detail-footer {
@@ -309,26 +332,28 @@
       margin-top: 60px;
       margin-bottom: 40px;
       padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .nav-btn {
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 12px; /* Скругление кнопок навигации */
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
       padding: 12px 24px;
       font-size: 14px;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       cursor: pointer;
-      transition: 0.3s;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
     }
 
     .nav-btn:hover {
-      color: #fff;
-      border-color: var(--accent);
-      background: rgba(159, 18, 57, 0.15);
+      background: rgba(159, 18, 57, 0.2);
+      border-color: var(--hover-border);
+      box-shadow: var(--hover-glow);
+      transform: translateY(-2px);
     }
 
     .page-indicator {
@@ -337,16 +362,24 @@
       letter-spacing: 0.1em;
     }
 
-    /* === ФУТЕР ИЗ МАКЕТА === */
+    /* === СТЕКЛЯННЫЙ ФУТЕР === */
     .main-footer {
       margin-top: auto;
-      background: #0d0a0f; /* Темный фон под футер */
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-radius: 24px;
       padding: 30px;
       text-align: center;
       font-size: 14px;
       color: var(--muted);
+      box-shadow: var(--soft-shadow);
+      transition: border-color 0.4s ease;
+    }
+
+    .main-footer:hover {
+      border-color: var(--hover-border);
     }
 
     .footer-copy {
@@ -374,11 +407,12 @@
       letter-spacing: 0.1em;
       font-size: 13px;
       font-weight: 600;
-      transition: color 0.3s;
+      transition: color 0.3s, text-shadow 0.3s;
     }
 
     .footer-links a:hover {
       color: #fff;
+      text-shadow: 0 0 10px rgba(255,255,255,0.3);
     }
 
     @media (max-width: 900px) {
@@ -388,6 +422,7 @@
       .card { width: 100%; max-width: 100%; }
       .detail-col { padding: 20px; }
       .footer-links { flex-direction: column; gap: 15px; }
+      .detail-footer { flex-direction: column; gap: 20px; }
     }
   </style>
 </head>
@@ -470,7 +505,7 @@
             <button class="nav-btn" onclick="openQuestion(3)">❮ ПРЕДЫДУЩИЙ</button>
             <button class="nav-btn" onclick="openQuestion(2)">СЛЕДУЮЩИЙ ❯</button>
           </div>
-          <a href="#" onclick="goHome(event)" style="color: var(--accent); text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
+          <a href="#" onclick="goHome(event)" style="color: #ff4d79; text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
         </div>
       </div>
 
@@ -499,7 +534,7 @@
             <button class="nav-btn" onclick="openQuestion(1)">❮ ПРЕДЫДУЩИЙ</button>
             <button class="nav-btn" onclick="openQuestion(3)">СЛЕДУЮЩИЙ ❯</button>
           </div>
-          <a href="#" onclick="goHome(event)" style="color: var(--accent); text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
+          <a href="#" onclick="goHome(event)" style="color: #ff4d79; text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
         </div>
       </div>
 
@@ -528,15 +563,15 @@
             <button class="nav-btn" onclick="openQuestion(2)">❮ ПРЕДЫДУЩИЙ</button>
             <button class="nav-btn" onclick="goHome(event)">В НАЧАЛО ↻</button>
           </div>
-          <a href="#" onclick="goHome(event)" style="color: var(--accent); text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
+          <a href="#" onclick="goHome(event)" style="color: #ff4d79; text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
         </div>
       </div>
 
     </section>
 
-    <!-- НОВЫЙ ФУТЕР ПО МАКЕТУ -->
+    <!-- СТЕКЛЯННЫЙ ФУТЕР -->
     <footer class="main-footer">
-      <div class="footer-copy">© 2026 <strong>QEOZAN DEV</strong>. Все права защищены.</div>
+      <div class="footer-copy">© 2026 <strong>DeStall DEV</strong>. Все права защищены.</div>
       <div class="footer-desc">Специализированный портал для руководящего состава Армии.</div>
       <div class="footer-links">
         <a href="#">СПЕЦ. СВЯЗЬ (DISCORD)</a>
@@ -592,7 +627,7 @@
       }, 500); // Ждем окончания анимации скрытия heroView
     }
 
-    // Возврат на главный экран (привязано к ссылкам "К началу")
+    // Возврат на главный экран
     function goHome(e) {
       if(e) e.preventDefault();
       clearInterval(timer);
