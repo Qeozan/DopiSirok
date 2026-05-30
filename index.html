@@ -17,14 +17,14 @@
       --text: #f5f0f2;
       --muted: #a39195;
       
-      /* Благородный бордовый (только для акцентов) */
+      /* Благородный бордовый */
       --accent: #8a031d; 
       --accent-light: #b30022;
       
       /* Настройки темного стекла */
-      --glass-bg: rgba(10, 2, 4, 0.65); /* Почти черное стекло */
-      --glass-border: rgba(138, 3, 29, 0.25); /* Бордовая граница */
-      --glass-border-top: rgba(255, 255, 255, 0.08); /* Легкий белый блик сверху */
+      --glass-bg: rgba(10, 2, 4, 0.65);
+      --glass-border: rgba(138, 3, 29, 0.25);
+      --glass-border-top: rgba(255, 255, 255, 0.08);
       --hover-border: rgba(180, 0, 30, 0.6);
       
       /* Тени */
@@ -46,30 +46,29 @@
       overflow-x: hidden; 
     }
 
-    /* === ТОПОГРАФИЧЕСКАЯ КАРТА === */
+    /* === СЛОЙ С ТВОЕЙ КАРТОЙ === */
     body::before {
       content: '';
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background-color: var(--bg-1);
       
-      /* Надежный SVG паттерн топографии */
-      background-image: url('https://unpkg.com/hero-patterns@1.0.1/src/patterns/topography.svg');
-      background-repeat: repeat;
+      /* Твоя ссылка на бордовую топографию */
+      background-image: url('https://i.imgur.com/350Uy0h.png'); 
       
-      /* Делаем карту белой/серебристой и полупрозрачной (как на твоем фото) */
-      filter: invert(1) opacity(0.12);
-      
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.5; /* Прозрачность карты для идеального баланса */
       z-index: -2;
       pointer-events: none;
     }
 
-    /* Легкая темная виньетка (затемнение по краям), чтобы сфокусировать внимание в центре */
+    /* Мягкое затемнение по краям (виньетка), чтобы карта уходила в темноту */
     body::after {
       content: '';
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
-      background: radial-gradient(circle at center, transparent 30%, #030001 100%);
+      background: radial-gradient(circle at center top, rgba(138, 3, 29, 0.15) 0%, #030001 90%);
       z-index: -1;
       pointer-events: none;
     }
@@ -153,7 +152,7 @@
       border-color: var(--hover-border);
       transform: translateY(-6px);
       box-shadow: var(--hover-glow);
-      background: rgba(25, 4, 8, 0.75); /* Чуть светлее при наведении */
+      background: rgba(25, 4, 8, 0.75); 
     }
 
     /* Шапка карточки */
@@ -291,7 +290,6 @@
       align-items: center;
     }
 
-    /* Детальные колонки со стеклом */
     .detail-col {
       padding: 30px;
       height: 100%;
