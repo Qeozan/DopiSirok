@@ -12,23 +12,23 @@
     }
 
     :root {
-      /* Базовый фон с легким бордовым подтоном вместо чистого черного */
-      --bg-1: #0a0103;
+      /* Истинно черный фон для контраста */
+      --bg-1: #030001;
       --text: #f5f0f2;
       --muted: #a39195;
       
-      /* Глубокий бордовый */
+      /* Благородный бордовый (только для акцентов) */
       --accent: #8a031d; 
       --accent-light: #b30022;
       
-      /* Настройки iPhone Glassmorphism */
-      --glass-bg: linear-gradient(145deg, rgba(30, 2, 8, 0.45) 0%, rgba(5, 0, 2, 0.7) 100%);
-      --glass-border: rgba(255, 255, 255, 0.05);
-      --glass-border-top: rgba(255, 255, 255, 0.12);
-      --hover-border: rgba(180, 0, 30, 0.4);
+      /* Настройки темного стекла */
+      --glass-bg: rgba(10, 2, 4, 0.65); /* Почти черное стекло */
+      --glass-border: rgba(138, 3, 29, 0.25); /* Бордовая граница */
+      --glass-border-top: rgba(255, 255, 255, 0.08); /* Легкий белый блик сверху */
+      --hover-border: rgba(180, 0, 30, 0.6);
       
-      /* Мягкие, глубокие тени */
-      --soft-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+      /* Тени */
+      --soft-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
       --hover-glow: 0 10px 30px rgba(138, 3, 29, 0.4); 
     }
 
@@ -46,30 +46,30 @@
       overflow-x: hidden; 
     }
 
-    /* === САМА ТОПОГРАФИЧЕСКАЯ КАРТА === */
+    /* === ТОПОГРАФИЧЕСКАЯ КАРТА === */
     body::before {
       content: '';
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      /* Железобетонная ссылка на текстуру */
-      background-image: url('https://raw.githubusercontent.com/subtlepatterns/SubtlePatterns/master/topography.png');
+      background-color: var(--bg-1);
+      
+      /* Надежный SVG паттерн топографии */
+      background-image: url('https://unpkg.com/hero-patterns@1.0.1/src/patterns/topography.svg');
       background-repeat: repeat;
       
-      /* ВОТ ЭТА СТРОЧКА ДЕЛАЕТ ЛИНИИ БОРДОВЫМИ И ВИДИМЫМИ */
-      filter: invert(16%) sepia(99%) saturate(7400%) hue-rotate(335deg) brightness(110%) contrast(120%) opacity(0.4);
+      /* Делаем карту белой/серебристой и полупрозрачной (как на твоем фото) */
+      filter: invert(1) opacity(0.12);
       
       z-index: -2;
       pointer-events: none;
     }
 
-    /* Мягкий бордовый градиент и виньетка поверх карты */
+    /* Легкая темная виньетка (затемнение по краям), чтобы сфокусировать внимание в центре */
     body::after {
       content: '';
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
-      background:
-        radial-gradient(circle at center, rgba(138, 3, 29, 0.2) 0%, transparent 70%),
-        linear-gradient(180deg, rgba(5, 1, 2, 0.1), rgba(10, 1, 3, 0.9));
+      background: radial-gradient(circle at center, transparent 30%, #030001 100%);
       z-index: -1;
       pointer-events: none;
     }
@@ -110,13 +110,13 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       margin-bottom: 50px;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+      text-shadow: 0 4px 20px rgba(0,0,0,0.9);
       text-align: center;
     }
 
     .main-title span {
       color: var(--accent-light); 
-      text-shadow: 0 0 20px rgba(179, 0, 34, 0.4);
+      text-shadow: 0 0 15px rgba(179, 0, 34, 0.4);
     }
 
     .cards-wrapper {
@@ -133,8 +133,8 @@
       border: 1px solid var(--glass-border);
       border-top: 1px solid var(--glass-border-top); 
       border-radius: 28px;
-      backdrop-filter: blur(30px) saturate(130%); 
-      -webkit-backdrop-filter: blur(30px) saturate(130%);
+      backdrop-filter: blur(25px) saturate(120%); 
+      -webkit-backdrop-filter: blur(25px) saturate(120%);
       box-shadow: var(--soft-shadow);
     }
 
@@ -153,12 +153,12 @@
       border-color: var(--hover-border);
       transform: translateY(-6px);
       box-shadow: var(--hover-glow);
-      background: linear-gradient(145deg, rgba(60, 5, 20, 0.6) 0%, rgba(15, 0, 5, 0.8) 100%);
+      background: rgba(25, 4, 8, 0.75); /* Чуть светлее при наведении */
     }
 
-    /* Шапка карточки - стеклянный бордовый градиент */
+    /* Шапка карточки */
     .card-header {
-      background: linear-gradient(180deg, rgba(138, 3, 29, 0.5) 0%, rgba(40, 2, 8, 0.1) 100%);
+      background: linear-gradient(180deg, rgba(138, 3, 29, 0.6) 0%, rgba(20, 2, 5, 0.1) 100%);
       color: #ffffff;
       font-weight: 800;
       text-align: center;
@@ -166,8 +166,7 @@
       font-size: 17px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      position: relative;
+      border-bottom: 1px solid rgba(138, 3, 29, 0.2);
     }
 
     .card-body {
@@ -185,7 +184,7 @@
       border-radius: 18px;
       border: 1px solid var(--glass-border);
       border-top: 1px solid var(--glass-border-top);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.6);
     }
 
     .card-list {
@@ -228,7 +227,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: rgba(10, 2, 5, 0.6);
+      background: rgba(10, 2, 4, 0.6);
       border: 1px solid var(--glass-border);
       border-top: 1px solid var(--glass-border-top);
       padding: 14px 28px;
@@ -340,7 +339,7 @@
     }
 
     .nav-btn {
-      background: rgba(20, 2, 5, 0.4);
+      background: rgba(10, 2, 4, 0.6);
       color: var(--text);
       border: 1px solid var(--glass-border);
       border-top: 1px solid var(--glass-border-top);
@@ -355,7 +354,7 @@
     }
 
     .nav-btn:hover {
-      background: rgba(138, 3, 29, 0.4);
+      background: rgba(138, 3, 29, 0.3);
       border-color: var(--hover-border);
       box-shadow: var(--hover-glow);
       transform: translateY(-2px);
