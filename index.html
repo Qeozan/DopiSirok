@@ -108,7 +108,7 @@
     }
 
     .main-title span {
-      color: #ff4d79; /* Чуть более светлый акцент для текста */
+      color: #ff4d79; 
     }
 
     .cards-wrapper {
@@ -131,7 +131,7 @@
       -webkit-backdrop-filter: blur(20px);
       box-shadow: var(--soft-shadow);
       cursor: pointer;
-      overflow: hidden; /* Чтобы шапка не вылезала за скругления */
+      overflow: hidden; 
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       display: flex;
       flex-direction: column;
@@ -141,20 +141,22 @@
       border-color: var(--hover-border);
       transform: translateY(-6px);
       box-shadow: var(--hover-glow);
-      background: rgba(60, 15, 25, 0.5); /* Чуть светлее при наведении */
+      background: rgba(60, 15, 25, 0.5); 
     }
 
-    /* Шапка карточки по фото */
+    /* Обновленная стеклянная шапка карточки */
     .card-header {
-      background: var(--accent);
+      background: linear-gradient(135deg, rgba(159, 18, 57, 0.5) 0%, rgba(60, 15, 25, 0.1) 100%);
       color: #ffffff;
       font-weight: 800;
       text-align: center;
-      padding: 18px 20px;
-      font-size: 18px;
+      padding: 20px;
+      font-size: 17px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 77, 121, 0.2);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+      position: relative;
     }
 
     .card-body {
@@ -185,8 +187,8 @@
       position: relative;
       padding-left: 15px;
       margin-bottom: 15px;
-      font-size: 14px;
-      line-height: 1.4;
+      font-size: 13px;
+      line-height: 1.5;
     }
 
     .card-list li::before {
@@ -195,7 +197,7 @@
       left: 0;
       color: #ff4d79;
       font-size: 10px;
-      top: 2px;
+      top: 3px;
     }
 
     .card-list strong {
@@ -207,33 +209,22 @@
 
     .timer-block {
       margin-top: 50px;
-      font-size: 18px;
+      font-size: 16px;
       color: var(--muted);
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      gap: 15px;
+      background: rgba(20, 10, 16, 0.5);
+      border: 1px solid var(--glass-border);
+      padding: 12px 24px;
+      border-radius: 99px;
+      backdrop-filter: blur(10px);
     }
 
-    .download-btn {
-      background: var(--accent);
-      color: #ffffff;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 15px 40px;
-      font-size: 16px;
-      font-weight: 700;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      letter-spacing: 0.1em;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-
-    .download-btn:hover {
-      background: #be123c;
-      transform: translateY(-2px);
-      box-shadow: var(--hover-glow);
+    .timer-block b {
+      color: #ff4d79;
+      margin: 0 5px;
+      font-size: 18px;
     }
 
     /* === ЭКРАН 2: ДЕТАЛЬНЫЙ ВОПРОС === */
@@ -263,7 +254,7 @@
     }
 
     .detail-header h2 {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 500;
       color: var(--muted);
       letter-spacing: 0.1em;
@@ -271,10 +262,11 @@
     }
 
     .detail-header h1 {
-      font-size: 42px;
+      font-size: 34px;
       font-weight: 800;
       margin: 0;
       text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      line-height: 1.3;
     }
 
     .detail-grid {
@@ -436,41 +428,40 @@
       
       <div class="cards-wrapper">
         <div class="card" onclick="openQuestion(1)">
-          <div class="card-header">ПОЧЕМУ ИМЕННО ВЫ?</div>
+          <div class="card-header">РЕЙД АВИАНОСЦА</div>
           <div class="card-body">
             <img src="https://placehold.co/200x200/1a0b12/9f1239?text=ФОТО+1" alt="Затычка 1" class="card-img">
             <ul class="card-list">
-              <li><strong>Уникальные компетенции</strong><br><span style="color:var(--muted)">Краткий текст затычка для первого пункта.</span></li>
-              <li><strong>Личный подход</strong><br><span style="color:var(--muted)">Краткий текст затычка для второго пункта.</span></li>
+              <li><strong>Полная стратегия</strong><br><span style="color:var(--muted)">Действия фракции при атаке.</span></li>
+              <li><strong>Тактика обороны</strong><br><span style="color:var(--muted)">Координация состава.</span></li>
             </ul>
           </div>
         </div>
 
         <div class="card" onclick="openQuestion(2)">
-          <div class="card-header">МОЯ СТРАТЕГИЯ</div>
+          <div class="card-header">КОНТРОЛЬ БАЗЫ</div>
           <div class="card-body">
             <img src="https://placehold.co/200x200/1a0b12/9f1239?text=ФОТО+2" alt="Затычка 2" class="card-img">
             <ul class="card-list">
-              <li><strong>Четкий план развития</strong><br><span style="color:var(--muted)">Краткий текст затычка для первого пункта.</span></li>
-              <li><strong>Ключевые вехи</strong><br><span style="color:var(--muted)">Краткий текст затычка для второго пункта.</span></li>
+              <li><strong>Усиление охраны</strong><br><span style="color:var(--muted)">Организация патрулей территории.</span></li>
+              <li><strong>Строгая отчетность</strong><br><span style="color:var(--muted)">Требования к докладам бойцов.</span></li>
             </ul>
           </div>
         </div>
 
         <div class="card" onclick="openQuestion(3)">
-          <div class="card-header">ВАШЕЙ КОМПАНИИ</div>
+          <div class="card-header">СВЯЗЬ С ГОС. СТРУКТУРАМИ</div>
           <div class="card-body">
             <img src="https://placehold.co/200x200/1a0b12/9f1239?text=ФОТО+3" alt="Затычка 3" class="card-img">
             <ul class="card-list">
-              <li><strong>Совпадение ценностей</strong><br><span style="color:var(--muted)">Краткий текст затычка для первого пункта.</span></li>
-              <li><strong>Общие цели</strong><br><span style="color:var(--muted)">Краткий текст затычка для второго пункта.</span></li>
+              <li><strong>Взаимодействие</strong><br><span style="color:var(--muted)">Полномочия в отношении других организаций.</span></li>
+              <li><strong>Статус армии</strong><br><span style="color:var(--muted)">Роль структуры в штате.</span></li>
             </ul>
           </div>
         </div>
       </div>
 
       <div class="timer-block">
-        <button class="download-btn">СКАЧАТЬ РЕЗЮМЕ</button>
         <div id="timerText">Переход к первому вопросу через: <b>20</b> сек</div>
       </div>
     </section>
@@ -482,21 +473,19 @@
       <div id="q1" class="question-content" style="display: none;">
         <div class="detail-header">
           <h2>ОТВЕТЫ НА КЛЮЧЕВЫЕ ВОПРОСЫ</h2>
-          <h1>1. ПОЧЕМУ ИМЕННО ВЫ?</h1>
+          <h1>1. Стратегия работы фракции<br>при начавшемся рейде авианосца</h1>
         </div>
         <div class="detail-grid">
           <div class="detail-col">
-            <h3>МОИ КОМПЕТЕНЦИИ</h3>
-            <p>Глубокие знания в области современных технологий и разработки. Успешно завершил проекты с отличными отзывами.</p>
-            <p>Текст затычка. Здесь будет подробное описание ваших навыков и почему именно вы подходите на эту роль.</p>
+            <h3>ОСНОВНОЙ ПЛАН</h3>
+            <p>Текст затычка. Описание первых действий руководящего состава при поступлении информации о рейде.</p>
           </div>
           <div>
             <img src="https://placehold.co/400x500/1a0b12/9f1239?text=ГЛАВНОЕ+ФОТО+1" class="detail-center-img" alt="Фото вопрос 1">
           </div>
           <div class="detail-col">
-            <h3>МОЙ ПОДХОД</h3>
-            <p>Проактивная позиция и внимание к деталям. Стремление к постоянному обучению и внедрению новых технологий.</p>
-            <p>Текст затычка. Описание вашего рабочего процесса и коммуникации в команде.</p>
+            <h3>КООРДИНАЦИЯ</h3>
+            <p>Текст затычка. Описание распределения огневых точек, запроса подкрепления и работы спец. отрядов.</p>
           </div>
         </div>
         <div class="detail-footer">
@@ -513,19 +502,19 @@
       <div id="q2" class="question-content" style="display: none;">
         <div class="detail-header">
           <h2>ОТВЕТЫ НА КЛЮЧЕВЫЕ ВОПРОСЫ</h2>
-          <h1>2. МОЯ СТРАТЕГИЯ</h1>
+          <h1>2. Усиление контроля военной базы<br>и требования к патрулям</h1>
         </div>
         <div class="detail-grid">
           <div class="detail-col">
-            <h3>ПЛАН ДЕЙСТВИЙ</h3>
-            <p>Текст затычка для левого блока второго вопроса. Описание первых шагов на новой позиции.</p>
+            <h3>БЕЗОПАСНОСТЬ БАЗЫ</h3>
+            <p>Текст затычка. Описание нововведений для усиления контроля КПП и прилегающих территорий авианосца.</p>
           </div>
           <div>
             <img src="https://placehold.co/400x500/1a0b12/9f1239?text=ГЛАВНОЕ+ФОТО+2" class="detail-center-img" alt="Фото вопрос 2">
           </div>
           <div class="detail-col">
-            <h3>ОЖИДАЕМЫЕ РЕЗУЛЬТАТЫ</h3>
-            <p>Текст затычка для правого блока второго вопроса. Прогнозируемый импакт и метрики успеха.</p>
+            <h3>ОТЧЕТНОСТЬ БОЙЦОВ</h3>
+            <p>Текст затычка. Формат докладов, интервалы патрулирования и методы повышения осведомленности состава.</p>
           </div>
         </div>
         <div class="detail-footer">
@@ -542,19 +531,19 @@
       <div id="q3" class="question-content" style="display: none;">
         <div class="detail-header">
           <h2>ОТВЕТЫ НА КЛЮЧЕВЫЕ ВОПРОСЫ</h2>
-          <h1>3. ВАШЕЙ КОМПАНИИ</h1>
+          <h1>3. Взаимодействие и полномочия армии<br>по отношению к другим гос. организациям</h1>
         </div>
         <div class="detail-grid">
           <div class="detail-col">
-            <h3>КУЛЬТУРНЫЙ КОД</h3>
-            <p>Текст затычка для левого блока третьего вопроса. Почему мне близка миссия вашей компании.</p>
+            <h3>СТАТУС И ВЛИЯНИЕ</h3>
+            <p>Текст затычка. Разъяснение того, что из себя представляет структура Армии в иерархии государственных организаций.</p>
           </div>
           <div>
             <img src="https://placehold.co/400x500/1a0b12/9f1239?text=ГЛАВНОЕ+ФОТО+3" class="detail-center-img" alt="Фото вопрос 3">
           </div>
           <div class="detail-col">
-            <h3>ДОЛГОСРОЧНЫЕ ЦЕЛИ</h3>
-            <p>Текст затычка для правого блока третьего вопроса. Как мы сможем расти вместе в ближайшие годы.</p>
+            <h3>РЕГЛАМЕНТ РАБОТЫ</h3>
+            <p>Текст затычка. Границы полномочий, совместные учения, юрисдикция и правила запроса поддержки.</p>
           </div>
         </div>
         <div class="detail-footer">
