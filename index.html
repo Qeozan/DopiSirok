@@ -12,19 +12,24 @@
     }
 
     :root {
-      --bg-1: #0a0508;
+      /* Основной фон (почти черный с едва уловимым красным подтоном) */
+      --bg-1: #050102;
       --text: #f5f0f2;
-      --muted: #a8949c;
-      --accent: #9f1239; /* Глубокий бордовый */
+      --muted: #a39195;
       
-      /* Переменные для эффекта бордового стекла */
-      --glass-bg: rgba(45, 10, 20, 0.4); 
-      --glass-border: rgba(159, 18, 57, 0.25);
-      --hover-border: rgba(159, 18, 57, 0.6);
+      /* Настоящий глубокий бордовый без розового */
+      --accent: #8a031d; 
+      --accent-light: #b30022; /* Для акцентного текста */
       
-      /* Мягкие тени вместо резкого свечения */
-      --soft-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      --hover-glow: 0 8px 25px rgba(159, 18, 57, 0.25); 
+      /* Настройки iPhone Glassmorphism */
+      --glass-bg: linear-gradient(145deg, rgba(30, 2, 8, 0.45) 0%, rgba(5, 0, 2, 0.7) 100%);
+      --glass-border: rgba(255, 255, 255, 0.05);
+      --glass-border-top: rgba(255, 255, 255, 0.12); /* Блик на верхней грани стекла */
+      --hover-border: rgba(180, 0, 30, 0.4);
+      
+      /* Мягкие, глубокие тени */
+      --soft-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+      --hover-glow: 0 10px 30px rgba(138, 3, 29, 0.25); 
     }
 
     html {
@@ -41,28 +46,28 @@
       overflow-x: hidden; 
     }
 
-    /* Фоновая картинка с бордовым затемнением */
+    /* Фоновая картинка с сильным затемнением */
     body::before {
       content: '';
       position: fixed;
       top: -30px; left: -30px;
       width: calc(100vw + 60px); height: calc(100vh + 60px);
-      background-image: url('https://placehold.co/1920x1080/0a0508/0a0508');
+      background-image: url('https://placehold.co/1920x1080/050102/050102');
       background-size: cover;
       background-position: center;
-      filter: blur(5px) brightness(0.3); 
+      filter: blur(8px) brightness(0.2); 
       z-index: -2;
     }
 
-    /* Мягкий градиент поверх фона */
+    /* Черно-бордовый градиент поверх фона */
     body::after {
       content: '';
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
       background:
-        radial-gradient(circle at top left, rgba(159, 18, 57, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at bottom right, rgba(136, 19, 55, 0.1) 0%, transparent 50%),
-        linear-gradient(180deg, rgba(10, 5, 8, 0.4), rgba(20, 10, 16, 0.8));
+        radial-gradient(circle at top left, rgba(90, 0, 20, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at bottom right, rgba(50, 0, 10, 0.25) 0%, transparent 50%),
+        linear-gradient(180deg, rgba(5, 1, 2, 0.6), rgba(10, 1, 3, 0.9));
       z-index: -1;
       pointer-events: none;
     }
@@ -103,12 +108,13 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       margin-bottom: 50px;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      text-shadow: 0 4px 20px rgba(0,0,0,0.8);
       text-align: center;
     }
 
     .main-title span {
-      color: #ff4d79; 
+      color: var(--accent-light); 
+      text-shadow: 0 0 20px rgba(179, 0, 34, 0.4);
     }
 
     .cards-wrapper {
@@ -119,17 +125,21 @@
       width: 100%;
     }
 
-    /* Стеклянные карточки */
+    /* === ИОС СТЕКЛО (Apple Glassmorphism) === */
+    .glass-panel {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-top: 1px solid var(--glass-border-top); /* Светлый блик сверху */
+      border-radius: 28px;
+      backdrop-filter: blur(30px) saturate(130%); /* Сильное размытие и насыщенность как в iOS */
+      -webkit-backdrop-filter: blur(30px) saturate(130%);
+      box-shadow: var(--soft-shadow);
+    }
+
     .card {
       flex: 1;
       min-width: 300px;
       max-width: 380px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 24px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: var(--soft-shadow);
       cursor: pointer;
       overflow: hidden; 
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -141,21 +151,20 @@
       border-color: var(--hover-border);
       transform: translateY(-6px);
       box-shadow: var(--hover-glow);
-      background: rgba(60, 15, 25, 0.5); 
+      background: linear-gradient(145deg, rgba(50, 5, 15, 0.5) 0%, rgba(10, 0, 5, 0.8) 100%);
     }
 
-    /* Обновленная стеклянная шапка карточки */
+    /* Шапка карточки - стеклянный бордовый градиент */
     .card-header {
-      background: linear-gradient(135deg, rgba(159, 18, 57, 0.5) 0%, rgba(60, 15, 25, 0.1) 100%);
+      background: linear-gradient(180deg, rgba(138, 3, 29, 0.45) 0%, rgba(40, 2, 8, 0.1) 100%);
       color: #ffffff;
       font-weight: 800;
       text-align: center;
-      padding: 20px;
+      padding: 22px 20px;
       font-size: 17px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      border-bottom: 1px solid rgba(255, 77, 121, 0.2);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       position: relative;
     }
 
@@ -171,9 +180,10 @@
       width: 120px;
       height: 120px;
       object-fit: cover;
-      border-radius: 16px;
+      border-radius: 18px;
       border: 1px solid var(--glass-border);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      border-top: 1px solid var(--glass-border-top);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     }
 
     .card-list {
@@ -189,15 +199,17 @@
       margin-bottom: 15px;
       font-size: 13px;
       line-height: 1.5;
+      color: var(--muted);
     }
 
     .card-list li::before {
       content: '■';
       position: absolute;
       left: 0;
-      color: #ff4d79;
+      color: var(--accent-light);
       font-size: 10px;
       top: 3px;
+      text-shadow: 0 0 10px rgba(179, 0, 34, 0.5);
     }
 
     .card-list strong {
@@ -214,15 +226,17 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: rgba(20, 10, 16, 0.5);
+      background: rgba(10, 2, 5, 0.6);
       border: 1px solid var(--glass-border);
-      padding: 12px 24px;
+      border-top: 1px solid var(--glass-border-top);
+      padding: 14px 28px;
       border-radius: 99px;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--soft-shadow);
     }
 
     .timer-block b {
-      color: #ff4d79;
+      color: var(--text);
       margin: 0 5px;
       font-size: 18px;
     }
@@ -265,7 +279,7 @@
       font-size: 34px;
       font-weight: 800;
       margin: 0;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      text-shadow: 0 4px 20px rgba(0,0,0,0.8);
       line-height: 1.3;
     }
 
@@ -276,25 +290,20 @@
       align-items: center;
     }
 
-    /* Стеклянные колонки */
+    /* Детальные колонки со стеклом */
     .detail-col {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 24px;
       padding: 30px;
       height: 100%;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: var(--soft-shadow);
-      transition: border-color 0.4s ease;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
     }
 
     .detail-col:hover {
       border-color: var(--hover-border);
+      box-shadow: var(--hover-glow);
     }
 
     .detail-col h3 {
-      color: #ff4d79;
+      color: var(--text);
       font-size: 20px;
       margin-top: 0;
       text-transform: uppercase;
@@ -314,7 +323,8 @@
       object-fit: cover;
       border-radius: 24px;
       border: 1px solid var(--glass-border);
-      box-shadow: var(--soft-shadow);
+      border-top: 1px solid var(--glass-border-top);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
     }
 
     .detail-footer {
@@ -328,9 +338,10 @@
     }
 
     .nav-btn {
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(20, 2, 5, 0.4);
       color: var(--text);
       border: 1px solid var(--glass-border);
+      border-top: 1px solid var(--glass-border-top);
       border-radius: 16px;
       padding: 12px 24px;
       font-size: 14px;
@@ -338,11 +349,11 @@
       letter-spacing: 0.1em;
       cursor: pointer;
       transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(15px);
     }
 
     .nav-btn:hover {
-      background: rgba(159, 18, 57, 0.2);
+      background: rgba(138, 3, 29, 0.3);
       border-color: var(--hover-border);
       box-shadow: var(--hover-glow);
       transform: translateY(-2px);
@@ -357,16 +368,10 @@
     /* === СТЕКЛЯННЫЙ ФУТЕР === */
     .main-footer {
       margin-top: auto;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 24px;
       padding: 30px;
       text-align: center;
       font-size: 14px;
       color: var(--muted);
-      box-shadow: var(--soft-shadow);
       transition: border-color 0.4s ease;
     }
 
@@ -422,40 +427,39 @@
 
   <div class="site">
 
-    <!-- ЭКРАН 1: ТРИ КАРТОЧКИ -->
     <section id="heroView" class="hero-view">
       <div class="main-title"><span>ТРИ</span> КЛЮЧЕВЫХ ОТВЕТА ДЛЯ РАБОТЫ</div>
       
       <div class="cards-wrapper">
-        <div class="card" onclick="openQuestion(1)">
+        <div class="card glass-panel" onclick="openQuestion(1)">
           <div class="card-header">РЕЙД АВИАНОСЦА</div>
           <div class="card-body">
-            <img src="https://placehold.co/200x200/1a0b12/9f1239?text=ФОТО+1" alt="Затычка 1" class="card-img">
+            <img src="https://placehold.co/200x200/0a0103/8a031d?text=ФОТО+1" alt="Затычка 1" class="card-img">
             <ul class="card-list">
-              <li><strong>Полная стратегия</strong><br><span style="color:var(--muted)">Действия фракции при атаке.</span></li>
-              <li><strong>Тактика обороны</strong><br><span style="color:var(--muted)">Координация состава.</span></li>
+              <li><strong>Полная стратегия</strong><br>Действия фракции при атаке.</li>
+              <li><strong>Тактика обороны</strong><br>Координация состава.</li>
             </ul>
           </div>
         </div>
 
-        <div class="card" onclick="openQuestion(2)">
+        <div class="card glass-panel" onclick="openQuestion(2)">
           <div class="card-header">КОНТРОЛЬ БАЗЫ</div>
           <div class="card-body">
-            <img src="https://placehold.co/200x200/1a0b12/9f1239?text=ФОТО+2" alt="Затычка 2" class="card-img">
+            <img src="https://placehold.co/200x200/0a0103/8a031d?text=ФОТО+2" alt="Затычка 2" class="card-img">
             <ul class="card-list">
-              <li><strong>Усиление охраны</strong><br><span style="color:var(--muted)">Организация патрулей территории.</span></li>
-              <li><strong>Строгая отчетность</strong><br><span style="color:var(--muted)">Требования к докладам бойцов.</span></li>
+              <li><strong>Усиление охраны</strong><br>Организация патрулей территории.</li>
+              <li><strong>Строгая отчетность</strong><br>Требования к докладам бойцов.</li>
             </ul>
           </div>
         </div>
 
-        <div class="card" onclick="openQuestion(3)">
+        <div class="card glass-panel" onclick="openQuestion(3)">
           <div class="card-header">СВЯЗЬ С ГОС. СТРУКТУРАМИ</div>
           <div class="card-body">
-            <img src="https://placehold.co/200x200/1a0b12/9f1239?text=ФОТО+3" alt="Затычка 3" class="card-img">
+            <img src="https://placehold.co/200x200/0a0103/8a031d?text=ФОТО+3" alt="Затычка 3" class="card-img">
             <ul class="card-list">
-              <li><strong>Взаимодействие</strong><br><span style="color:var(--muted)">Полномочия в отношении других организаций.</span></li>
-              <li><strong>Статус армии</strong><br><span style="color:var(--muted)">Роль структуры в штате.</span></li>
+              <li><strong>Взаимодействие</strong><br>Полномочия в отношении других организаций.</li>
+              <li><strong>Статус армии</strong><br>Роль структуры в штате.</li>
             </ul>
           </div>
         </div>
@@ -466,24 +470,22 @@
       </div>
     </section>
 
-    <!-- ЭКРАН 2: ДЕТАЛЬНЫЕ ВОПРОСЫ -->
     <section id="detailView" class="detail-view">
       
-      <!-- ВОПРОС 1 -->
       <div id="q1" class="question-content" style="display: none;">
         <div class="detail-header">
           <h2>ОТВЕТЫ НА КЛЮЧЕВЫЕ ВОПРОСЫ</h2>
           <h1>1. Стратегия работы фракции<br>при начавшемся рейде авианосца</h1>
         </div>
         <div class="detail-grid">
-          <div class="detail-col">
+          <div class="detail-col glass-panel">
             <h3>ОСНОВНОЙ ПЛАН</h3>
             <p>Текст затычка. Описание первых действий руководящего состава при поступлении информации о рейде.</p>
           </div>
           <div>
-            <img src="https://placehold.co/400x500/1a0b12/9f1239?text=ГЛАВНОЕ+ФОТО+1" class="detail-center-img" alt="Фото вопрос 1">
+            <img src="https://placehold.co/400x500/0a0103/8a031d?text=ГЛАВНОЕ+ФОТО+1" class="detail-center-img" alt="Фото вопрос 1">
           </div>
-          <div class="detail-col">
+          <div class="detail-col glass-panel">
             <h3>КООРДИНАЦИЯ</h3>
             <p>Текст затычка. Описание распределения огневых точек, запроса подкрепления и работы спец. отрядов.</p>
           </div>
@@ -494,25 +496,24 @@
             <button class="nav-btn" onclick="openQuestion(3)">❮ ПРЕДЫДУЩИЙ</button>
             <button class="nav-btn" onclick="openQuestion(2)">СЛЕДУЮЩИЙ ❯</button>
           </div>
-          <a href="#" onclick="goHome(event)" style="color: #ff4d79; text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
+          <a href="#" onclick="goHome(event)" style="color: var(--accent-light); text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
         </div>
       </div>
 
-      <!-- ВОПРОС 2 -->
       <div id="q2" class="question-content" style="display: none;">
         <div class="detail-header">
           <h2>ОТВЕТЫ НА КЛЮЧЕВЫЕ ВОПРОСЫ</h2>
           <h1>2. Усиление контроля военной базы<br>и требования к патрулям</h1>
         </div>
         <div class="detail-grid">
-          <div class="detail-col">
+          <div class="detail-col glass-panel">
             <h3>БЕЗОПАСНОСТЬ БАЗЫ</h3>
             <p>Текст затычка. Описание нововведений для усиления контроля КПП и прилегающих территорий авианосца.</p>
           </div>
           <div>
-            <img src="https://placehold.co/400x500/1a0b12/9f1239?text=ГЛАВНОЕ+ФОТО+2" class="detail-center-img" alt="Фото вопрос 2">
+            <img src="https://placehold.co/400x500/0a0103/8a031d?text=ГЛАВНОЕ+ФОТО+2" class="detail-center-img" alt="Фото вопрос 2">
           </div>
-          <div class="detail-col">
+          <div class="detail-col glass-panel">
             <h3>ОТЧЕТНОСТЬ БОЙЦОВ</h3>
             <p>Текст затычка. Формат докладов, интервалы патрулирования и методы повышения осведомленности состава.</p>
           </div>
@@ -523,25 +524,24 @@
             <button class="nav-btn" onclick="openQuestion(1)">❮ ПРЕДЫДУЩИЙ</button>
             <button class="nav-btn" onclick="openQuestion(3)">СЛЕДУЮЩИЙ ❯</button>
           </div>
-          <a href="#" onclick="goHome(event)" style="color: #ff4d79; text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
+          <a href="#" onclick="goHome(event)" style="color: var(--accent-light); text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
         </div>
       </div>
 
-      <!-- ВОПРОС 3 -->
       <div id="q3" class="question-content" style="display: none;">
         <div class="detail-header">
           <h2>ОТВЕТЫ НА КЛЮЧЕВЫЕ ВОПРОСЫ</h2>
           <h1>3. Взаимодействие и полномочия армии<br>по отношению к другим гос. организациям</h1>
         </div>
         <div class="detail-grid">
-          <div class="detail-col">
+          <div class="detail-col glass-panel">
             <h3>СТАТУС И ВЛИЯНИЕ</h3>
             <p>Текст затычка. Разъяснение того, что из себя представляет структура Армии в иерархии государственных организаций.</p>
           </div>
           <div>
-            <img src="https://placehold.co/400x500/1a0b12/9f1239?text=ГЛАВНОЕ+ФОТО+3" class="detail-center-img" alt="Фото вопрос 3">
+            <img src="https://placehold.co/400x500/0a0103/8a031d?text=ГЛАВНОЕ+ФОТО+3" class="detail-center-img" alt="Фото вопрос 3">
           </div>
-          <div class="detail-col">
+          <div class="detail-col glass-panel">
             <h3>РЕГЛАМЕНТ РАБОТЫ</h3>
             <p>Текст затычка. Границы полномочий, совместные учения, юрисдикция и правила запроса поддержки.</p>
           </div>
@@ -552,14 +552,13 @@
             <button class="nav-btn" onclick="openQuestion(2)">❮ ПРЕДЫДУЩИЙ</button>
             <button class="nav-btn" onclick="goHome(event)">В НАЧАЛО ↻</button>
           </div>
-          <a href="#" onclick="goHome(event)" style="color: #ff4d79; text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
+          <a href="#" onclick="goHome(event)" style="color: var(--accent-light); text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
         </div>
       </div>
 
     </section>
 
-    <!-- СТЕКЛЯННЫЙ ФУТЕР -->
-    <footer class="main-footer">
+    <footer class="main-footer glass-panel">
       <div class="footer-copy">© 2026 <strong>DeStall DEV</strong>. Все права защищены.</div>
       <div class="footer-desc">Специализированный портал для руководящего состава Армии.</div>
       <div class="footer-links">
