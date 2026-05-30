@@ -17,9 +17,9 @@
       --bg-2: #140a10;
       --text: #f5f0f2;
       --muted: #a8949c;
-      --accent: #eab308; /* Желтый акцент из референса */
+      --accent: #9f1239; /* Бордовый акцент */
       --glow: 0 0 30px rgba(159, 18, 57, 0.3);
-      --accent-glow: 0 0 20px rgba(234, 179, 8, 0.4);
+      --accent-glow: 0 0 20px rgba(159, 18, 57, 0.6);
     }
 
     html {
@@ -66,33 +66,10 @@
       z-index: 10;
       max-width: 1300px;
       margin: 0 auto;
-      padding: 28px 20px 40px;
+      padding: 40px 20px;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-    }
-
-    /* === ВЕРХНЕЕ МЕНЮ === */
-    .topbar {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      padding: 15px;
-      margin-bottom: 40px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-size: 14px;
-    }
-
-    .topbar span {
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    .topbar span:hover, .topbar span.active {
-      color: var(--accent);
-      text-shadow: var(--accent-glow);
     }
 
     /* === ЭКРАН 1: КАРТОЧКИ === */
@@ -103,6 +80,7 @@
       justify-content: center;
       min-height: 70vh;
       transition: opacity 0.5s ease, transform 0.5s ease;
+      margin-bottom: 40px;
     }
 
     .hero-view.hide {
@@ -141,7 +119,7 @@
       max-width: 380px;
       background: rgba(20, 10, 16, 0.6);
       border: 2px solid rgba(255, 255, 255, 0.1);
-      border-radius: 0; /* Строгие углы */
+      border-radius: 20px; /* Добавлено скругление */
       backdrop-filter: blur(15px);
       cursor: pointer;
       transition: all 0.3s ease;
@@ -157,13 +135,15 @@
 
     .card-header {
       background: var(--accent);
-      color: #000;
+      color: #ffffff; /* Изменено на белый для бордового фона */
       font-weight: 800;
       text-align: center;
       padding: 15px;
       font-size: 18px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
+      border-top-left-radius: 16px; /* Скругление внутренних углов шапки */
+      border-top-right-radius: 16px;
     }
 
     .card-body {
@@ -178,8 +158,8 @@
       width: 120px;
       height: 120px;
       object-fit: cover;
-      border-radius: 0;
-      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 16px; /* Скругление картинок */
+      border: 2px solid rgba(255,255,255,0.1);
     }
 
     .card-list {
@@ -225,8 +205,9 @@
 
     .download-btn {
       background: var(--accent);
-      color: #000;
+      color: #ffffff; /* Изменено на белый */
       border: none;
+      border-radius: 12px; /* Добавлено скругление кнопки */
       padding: 15px 40px;
       font-size: 16px;
       font-weight: 700;
@@ -237,8 +218,8 @@
     }
 
     .download-btn:hover {
-      background: #fff;
-      box-shadow: 0 0 20px rgba(255,255,255,0.4);
+      background: #be123c;
+      box-shadow: var(--accent-glow);
     }
 
     /* === ЭКРАН 2: ДЕТАЛЬНЫЙ ВОПРОС === */
@@ -247,6 +228,7 @@
       opacity: 0;
       transform: translateY(20px);
       transition: 0.5s ease;
+      flex-grow: 1;
     }
 
     .detail-view.active {
@@ -291,6 +273,7 @@
     .detail-col {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px; /* Скругление колонок */
       padding: 30px;
       height: 100%;
     }
@@ -314,6 +297,7 @@
       width: 300px;
       height: 350px;
       object-fit: cover;
+      border-radius: 20px; /* Скругление главного фото */
       border: 2px solid var(--accent);
       box-shadow: var(--glow);
     }
@@ -323,6 +307,7 @@
       justify-content: space-between;
       align-items: center;
       margin-top: 60px;
+      margin-bottom: 40px;
       padding-top: 20px;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
@@ -331,6 +316,7 @@
       background: transparent;
       color: var(--muted);
       border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px; /* Скругление кнопок навигации */
       padding: 12px 24px;
       font-size: 14px;
       text-transform: uppercase;
@@ -342,7 +328,7 @@
     .nav-btn:hover {
       color: #fff;
       border-color: var(--accent);
-      background: rgba(234, 179, 8, 0.1);
+      background: rgba(159, 18, 57, 0.15);
     }
 
     .page-indicator {
@@ -351,24 +337,65 @@
       letter-spacing: 0.1em;
     }
 
+    /* === ФУТЕР ИЗ МАКЕТА === */
+    .main-footer {
+      margin-top: auto;
+      background: #0d0a0f; /* Темный фон под футер */
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 24px;
+      padding: 30px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .footer-copy {
+      margin-bottom: 15px;
+    }
+
+    .footer-copy strong {
+      color: #fff;
+    }
+
+    .footer-desc {
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 13px;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
     @media (max-width: 900px) {
       .detail-grid { grid-template-columns: 1fr; text-align: center; }
       .detail-center-img { margin: 0 auto; width: 100%; max-width: 400px; }
       .cards-wrapper { flex-direction: column; align-items: center; }
       .card { width: 100%; max-width: 100%; }
       .detail-col { padding: 20px; }
+      .footer-links { flex-direction: column; gap: 15px; }
     }
   </style>
 </head>
 <body>
 
   <div class="site">
-    <div class="topbar">
-      <span>Обо мне</span>
-      <span class="active" onclick="goHome()">Ответы</span>
-      <span>Контакты</span>
-    </div>
 
+    <!-- ЭКРАН 1: ТРИ КАРТОЧКИ -->
     <section id="heroView" class="hero-view">
       <div class="main-title"><span>ТРИ</span> КЛЮЧЕВЫХ ОТВЕТА ДЛЯ РАБОТЫ</div>
       
@@ -376,7 +403,7 @@
         <div class="card" onclick="openQuestion(1)">
           <div class="card-header">ПОЧЕМУ ИМЕННО ВЫ?</div>
           <div class="card-body">
-            <img src="https://placehold.co/200x200/1a0b12/eab308?text=ФОТО+1" alt="Затычка 1" class="card-img">
+            <img src="https://placehold.co/200x200/1a0b12/9f1239?text=ФОТО+1" alt="Затычка 1" class="card-img">
             <ul class="card-list">
               <li><strong>Уникальные компетенции</strong><br><span style="color:var(--muted)">Краткий текст затычка для первого пункта.</span></li>
               <li><strong>Личный подход</strong><br><span style="color:var(--muted)">Краткий текст затычка для второго пункта.</span></li>
@@ -387,7 +414,7 @@
         <div class="card" onclick="openQuestion(2)">
           <div class="card-header">МОЯ СТРАТЕГИЯ</div>
           <div class="card-body">
-            <img src="https://placehold.co/200x200/1a0b12/eab308?text=ФОТО+2" alt="Затычка 2" class="card-img">
+            <img src="https://placehold.co/200x200/1a0b12/9f1239?text=ФОТО+2" alt="Затычка 2" class="card-img">
             <ul class="card-list">
               <li><strong>Четкий план развития</strong><br><span style="color:var(--muted)">Краткий текст затычка для первого пункта.</span></li>
               <li><strong>Ключевые вехи</strong><br><span style="color:var(--muted)">Краткий текст затычка для второго пункта.</span></li>
@@ -398,7 +425,7 @@
         <div class="card" onclick="openQuestion(3)">
           <div class="card-header">ВАШЕЙ КОМПАНИИ</div>
           <div class="card-body">
-            <img src="https://placehold.co/200x200/1a0b12/eab308?text=ФОТО+3" alt="Затычка 3" class="card-img">
+            <img src="https://placehold.co/200x200/1a0b12/9f1239?text=ФОТО+3" alt="Затычка 3" class="card-img">
             <ul class="card-list">
               <li><strong>Совпадение ценностей</strong><br><span style="color:var(--muted)">Краткий текст затычка для первого пункта.</span></li>
               <li><strong>Общие цели</strong><br><span style="color:var(--muted)">Краткий текст затычка для второго пункта.</span></li>
@@ -413,8 +440,10 @@
       </div>
     </section>
 
+    <!-- ЭКРАН 2: ДЕТАЛЬНЫЕ ВОПРОСЫ -->
     <section id="detailView" class="detail-view">
       
+      <!-- ВОПРОС 1 -->
       <div id="q1" class="question-content" style="display: none;">
         <div class="detail-header">
           <h2>ОТВЕТЫ НА КЛЮЧЕВЫЕ ВОПРОСЫ</h2>
@@ -427,7 +456,7 @@
             <p>Текст затычка. Здесь будет подробное описание ваших навыков и почему именно вы подходите на эту роль.</p>
           </div>
           <div>
-            <img src="https://placehold.co/400x500/1a0b12/eab308?text=ГЛАВНОЕ+ФОТО+1" class="detail-center-img" alt="Фото вопрос 1">
+            <img src="https://placehold.co/400x500/1a0b12/9f1239?text=ГЛАВНОЕ+ФОТО+1" class="detail-center-img" alt="Фото вопрос 1">
           </div>
           <div class="detail-col">
             <h3>МОЙ ПОДХОД</h3>
@@ -441,10 +470,11 @@
             <button class="nav-btn" onclick="openQuestion(3)">❮ ПРЕДЫДУЩИЙ</button>
             <button class="nav-btn" onclick="openQuestion(2)">СЛЕДУЮЩИЙ ❯</button>
           </div>
-          <a href="#" style="color: var(--accent); text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
+          <a href="#" onclick="goHome(event)" style="color: var(--accent); text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
         </div>
       </div>
 
+      <!-- ВОПРОС 2 -->
       <div id="q2" class="question-content" style="display: none;">
         <div class="detail-header">
           <h2>ОТВЕТЫ НА КЛЮЧЕВЫЕ ВОПРОСЫ</h2>
@@ -456,7 +486,7 @@
             <p>Текст затычка для левого блока второго вопроса. Описание первых шагов на новой позиции.</p>
           </div>
           <div>
-            <img src="https://placehold.co/400x500/1a0b12/eab308?text=ГЛАВНОЕ+ФОТО+2" class="detail-center-img" alt="Фото вопрос 2">
+            <img src="https://placehold.co/400x500/1a0b12/9f1239?text=ГЛАВНОЕ+ФОТО+2" class="detail-center-img" alt="Фото вопрос 2">
           </div>
           <div class="detail-col">
             <h3>ОЖИДАЕМЫЕ РЕЗУЛЬТАТЫ</h3>
@@ -469,10 +499,11 @@
             <button class="nav-btn" onclick="openQuestion(1)">❮ ПРЕДЫДУЩИЙ</button>
             <button class="nav-btn" onclick="openQuestion(3)">СЛЕДУЮЩИЙ ❯</button>
           </div>
-          <a href="#" style="color: var(--accent); text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
+          <a href="#" onclick="goHome(event)" style="color: var(--accent); text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
         </div>
       </div>
 
+      <!-- ВОПРОС 3 -->
       <div id="q3" class="question-content" style="display: none;">
         <div class="detail-header">
           <h2>ОТВЕТЫ НА КЛЮЧЕВЫЕ ВОПРОСЫ</h2>
@@ -484,7 +515,7 @@
             <p>Текст затычка для левого блока третьего вопроса. Почему мне близка миссия вашей компании.</p>
           </div>
           <div>
-            <img src="https://placehold.co/400x500/1a0b12/eab308?text=ГЛАВНОЕ+ФОТО+3" class="detail-center-img" alt="Фото вопрос 3">
+            <img src="https://placehold.co/400x500/1a0b12/9f1239?text=ГЛАВНОЕ+ФОТО+3" class="detail-center-img" alt="Фото вопрос 3">
           </div>
           <div class="detail-col">
             <h3>ДОЛГОСРОЧНЫЕ ЦЕЛИ</h3>
@@ -495,13 +526,24 @@
           <div class="page-indicator">Страница 3/3</div>
           <div>
             <button class="nav-btn" onclick="openQuestion(2)">❮ ПРЕДЫДУЩИЙ</button>
-            <button class="nav-btn" onclick="openQuestion(1)">В НАЧАЛО ↻</button>
+            <button class="nav-btn" onclick="goHome(event)">В НАЧАЛО ↻</button>
           </div>
-          <a href="#" style="color: var(--accent); text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
+          <a href="#" onclick="goHome(event)" style="color: var(--accent); text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
         </div>
       </div>
 
     </section>
+
+    <!-- НОВЫЙ ФУТЕР ПО МАКЕТУ -->
+    <footer class="main-footer">
+      <div class="footer-copy">© 2026 <strong>QEOZAN DEV</strong>. Все права защищены.</div>
+      <div class="footer-desc">Специализированный портал для руководящего состава Армии.</div>
+      <div class="footer-links">
+        <a href="#">СПЕЦ. СВЯЗЬ (DISCORD)</a>
+        <a href="#">УСТАВ АРМИИ</a>
+      </div>
+    </footer>
+
   </div>
 
   <script>
@@ -550,8 +592,9 @@
       }, 500); // Ждем окончания анимации скрытия heroView
     }
 
-    // Возврат на главный экран (опционально, привязано к слову "Ответы" в меню)
-    function goHome() {
+    // Возврат на главный экран (привязано к ссылкам "К началу")
+    function goHome(e) {
+      if(e) e.preventDefault();
       clearInterval(timer);
       detailView.classList.remove('active');
       setTimeout(() => {
@@ -563,6 +606,7 @@
         timeLeft = 20;
         timerText.innerHTML = `Переход к первому вопросу через: <b>${timeLeft}</b> сек`;
         startTimer();
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }, 500);
     }
 
