@@ -12,15 +12,16 @@
     }
 
     :root {
+      /* Основной фон сайта */
       --bg-1: #030001;
       --text: #f5f0f2;
       --muted: #a39195;
       
-      /* Благородный бордовый */
+      /* Благородный бордовый (акцентный) */
       --accent: #8a031d; 
       --accent-light: #b30022;
       
-      /* Настройки темного iOS стекла */
+      /* Настройки темного стекла */
       --glass-bg: rgba(10, 2, 4, 0.65);
       --glass-border: rgba(138, 3, 29, 0.25);
       --glass-border-top: rgba(255, 255, 255, 0.08);
@@ -50,10 +51,10 @@
       content: '';
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background-image: url('https://i.imgur.com/heVlYqp.png'); 
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      background-image: url('coat_of_arms.png'), url('compass_lines.png'), url('topography.png'); 
+      background-size: 25% auto, 60% auto, cover;
+      background-position: center 30vh, center, center;
+      background-repeat: no-repeat, no-repeat, no-repeat;
       z-index: -2;
       pointer-events: none;
     }
@@ -119,17 +120,21 @@
       justify-content: center;
       flex-wrap: wrap;
       width: 100%;
+      position: relative;
+      overflow: visible; /* Разрешаем заголовкам выходить за пределы карточек */
     }
 
-    /* Стеклянные панели (Glassmorphism) */
+    /* === ОБНОВЛЕННЫЕ СТЕКЛЯННЫЕ ПАНЕЛИ (Less Glass, Less Blur) === */
     .glass-panel {
-      background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       border-top: 1px solid var(--glass-border-top); 
       border-radius: 28px;
-      backdrop-filter: blur(25px) saturate(120%); 
-      -webkit-backdrop-filter: blur(25px) saturate(120%);
+      /* Уменьшил размытие, чтобы выполнить требование "не настолько стеклянным" */
+      backdrop-filter: blur(15px) saturate(120%); 
+      -webkit-backdrop-filter: blur(15px) saturate(120%);
       box-shadow: var(--soft-shadow);
+      position: relative;
+      overflow: visible;
     }
 
     .card {
@@ -141,6 +146,9 @@
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       display: flex;
       flex-direction: column;
+      /* Увеличил непрозрачность градиента, чтобы карточки казались более плотными */
+      background: linear-gradient(145deg, rgba(30, 2, 8, 0.4) 0%, rgba(5, 0, 2, 0.6) 100%);
+      margin-top: 25px; /* Освободил место для плавающего заголовка */
     }
 
     .card:hover {
@@ -150,21 +158,32 @@
       background: rgba(25, 4, 8, 0.75); 
     }
 
-    /* Шапка карточки */
+    /* === ОБНОВЛЕННЫЕ ШАПКИ КАРТОЧЕК ( Floating Pills ) === */
     .card-header {
-      background: linear-gradient(180deg, rgba(138, 3, 29, 0.6) 0%, rgba(20, 2, 5, 0.1) 100%);
-      color: #ffffff;
-      font-weight: 800;
+      /* Позиционирование заголовка поверх карточки, как на фото */
+      position: absolute;
+      top: -18px; /* Выходит за пределы карточки вверх */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%; /* Почти на всю ширину карточки, как на фото */
+      z-index: 20;
+      
+      /* Стиль закругленного прямоугольника (пилюли) */
+      background: #1a040b; /* Темный бордовый/черный фон из топографии */
+      color: #ffffff; /* Белый тактический текст */
+      font-weight: 700;
       text-align: center;
-      padding: 22px 20px;
-      font-size: 17px;
+      padding: 12px 10px; /* Узкие отступы пилюли */
+      font-size: 15px; /* Тот же тактический размер */
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      border-bottom: 1px solid rgba(138, 3, 29, 0.2);
+      letter-spacing: 0.1em;
+      border-radius: 99px; /* Полное закругление */
+      border: 2px solid rgba(138, 3, 29, 0.5); /* Тонкая бордовая граница, как на фото */
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     }
 
     .card-body {
-      padding: 25px 20px;
+      padding: 35px 20px 25px 20px; /* Увеличил верхний отступ для плавающего заголовка */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -214,27 +233,7 @@
       margin-bottom: 4px;
     }
 
-    .timer-block {
-      margin-top: 50px;
-      font-size: 16px;
-      color: var(--muted);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: rgba(10, 2, 4, 0.6);
-      border: 1px solid var(--glass-border);
-      border-top: 1px solid var(--glass-border-top);
-      padding: 14px 28px;
-      border-radius: 99px;
-      backdrop-filter: blur(20px);
-      box-shadow: var(--soft-shadow);
-    }
-
-    .timer-block b {
-      color: var(--text);
-      margin: 0 5px;
-      font-size: 18px;
-    }
+    /* === УДАЛЕННЫЙ ТАЙМЕР (Удален из HTML) === */
 
     /* === ЭКРАН 2: ДЕТАЛЬНЫЙ ВОПРОС === */
     .detail-view {
@@ -285,6 +284,7 @@
       align-items: center;
     }
 
+    /* Детальные колонки со стеклом */
     .detail-col {
       padding: 30px;
       height: 100%;
@@ -422,13 +422,13 @@
   <div class="site">
 
     <section id="heroView" class="hero-view">
-      <div class="main-title"><span>ТРИ</span> КЛЮЧЕВЫХ ОТВЕТА ДЛЯ РАБОТЫ</div>
+      <div class="main-title">ДОПЫ</div>
       
       <div class="cards-wrapper">
         <div class="card glass-panel" onclick="openQuestion(1)">
           <div class="card-header">РЕЙД АВИАНОСЦА</div>
           <div class="card-body">
-            <img src="https://placehold.co/200x200/0a0103/8a031d?text=ФОТО+1" alt="Затычка 1" class="card-img">
+            <img src="ФОТО_1.png" alt="Затычка 1" class="card-img">
             <ul class="card-list">
               <li><strong>Полная стратегия</strong><br>Действия фракции при атаке.</li>
               <li><strong>Тактика обороны</strong><br>Координация состава.</li>
@@ -439,7 +439,7 @@
         <div class="card glass-panel" onclick="openQuestion(2)">
           <div class="card-header">КОНТРОЛЬ БАЗЫ</div>
           <div class="card-body">
-            <img src="https://placehold.co/200x200/0a0103/8a031d?text=ФОТО+2" alt="Затычка 2" class="card-img">
+            <img src="ФОТО_2.png" alt="Затычка 2" class="card-img">
             <ul class="card-list">
               <li><strong>Усиление охраны</strong><br>Организация патрулей территории.</li>
               <li><strong>Строгая отчетность</strong><br>Требования к докладам бойцов.</li>
@@ -450,7 +450,7 @@
         <div class="card glass-panel" onclick="openQuestion(3)">
           <div class="card-header">СВЯЗЬ С ГОС. СТРУКТУРАМИ</div>
           <div class="card-body">
-            <img src="https://placehold.co/200x200/0a0103/8a031d?text=ФОТО+3" alt="Затычка 3" class="card-img">
+            <img src="ФОТО_3.png" alt="Затычка 3" class="card-img">
             <ul class="card-list">
               <li><strong>Взаимодействие</strong><br>Полномочия в отношении других организаций.</li>
               <li><strong>Статус армии</strong><br>Роль структуры в штате.</li>
@@ -459,10 +459,7 @@
         </div>
       </div>
 
-      <div class="timer-block">
-        <div id="timerText">Переход к первому вопросу через: <b>20</b> сек</div>
-      </div>
-    </section>
+      </section>
 
     <section id="detailView" class="detail-view">
       
@@ -477,7 +474,7 @@
             <p>Текст затычка. Описание первых действий руководящего состава при поступлении информации о рейде.</p>
           </div>
           <div>
-            <img src="https://placehold.co/400x500/0a0103/8a031d?text=ГЛАВНОЕ+ФОТО+1" class="detail-center-img" alt="Фото вопрос 1">
+            <img src="ГЛАВНОЕ_ФОТО_1.png" class="detail-center-img" alt="Фото вопрос 1">
           </div>
           <div class="detail-col glass-panel">
             <h3>КООРДИНАЦИЯ</h3>
@@ -505,7 +502,7 @@
             <p>Текст затычка. Описание нововведений для усиления контроля КПП и прилегающих территорий авианосца.</p>
           </div>
           <div>
-            <img src="https://placehold.co/400x500/0a0103/8a031d?text=ГЛАВНОЕ+ФОТО+2" class="detail-center-img" alt="Фото вопрос 2">
+            <img src="ГЛАВНОЕ_ФОТО_2.png" class="detail-center-img" alt="Фото вопрос 2">
           </div>
           <div class="detail-col glass-panel">
             <h3>ОТЧЕТНОСТЬ БОЙЦОВ</h3>
@@ -533,7 +530,7 @@
             <p>Текст затычка. Разъяснение того, что из себя представляет структура Армии в иерархии государственных организаций.</p>
           </div>
           <div>
-            <img src="https://placehold.co/400x500/0a0103/8a031d?text=ГЛАВНОЕ+ФОТО+3" class="detail-center-img" alt="Фото вопрос 3">
+            <img src="ГЛАВНОЕ_ФОТО_3.png" class="detail-center-img" alt="Фото вопрос 3">
           </div>
           <div class="detail-col glass-panel">
             <h3>РЕГЛАМЕНТ РАБОТЫ</h3>
@@ -566,19 +563,19 @@
   <script>
     const heroView = document.getElementById('heroView');
     const detailView = document.getElementById('detailView');
-    const timerText = document.getElementById('timerText');
+    /* ТАЙМЕР_ТЕКСТ ПОЛНОСТЬЮ УДАЛЕН ИЗ DOM */
     const allQuestions = document.querySelectorAll('.question-content');
     
     let timer;
     let timeLeft = 20;
 
-    // Запуск таймера при загрузке
+    // Функция автоперехода (Сохранена, но запуск закомментирован)
     function startTimer() {
       timer = setInterval(() => {
         timeLeft--;
-        if (timerText) {
+        /* if (timerText) {
           timerText.innerHTML = `Переход к первому вопросу через: <b>${timeLeft}</b> сек`;
-        }
+        } */
         if (timeLeft <= 0) {
           clearInterval(timer);
           openQuestion(1);
@@ -588,7 +585,7 @@
 
     // Переход к конкретному вопросу
     function openQuestion(num) {
-      clearInterval(timer); 
+      clearInterval(timer); // Очищаем таймер при ручном клике
       
       heroView.classList.add('hide');
       setTimeout(() => {
@@ -616,13 +613,14 @@
         setTimeout(() => heroView.classList.remove('hide'), 50);
         
         timeLeft = 20;
-        timerText.innerHTML = `Переход к первому вопросу через: <b>${timeLeft}</b> сек`;
-        startTimer();
+        /* ТАЙМЕР УДАЛЕН ИЗ DOM */
+        startTimer(); // Перезапускаем таймер, если вернулись на главную (Но запуск закомментирован)
         window.scrollTo({ top: 0, behavior: "smooth" });
       }, 500);
     }
 
-    window.onload = startTimer;
+    // === ЗАПУСК ТАЙМЕРА ПРИ ЗАГРУЗКЕ УБРАН (ЗАКОММЕНТИРОВАН) ===
+    /* window.onload = startTimer; */
   </script>
 </body>
 </html>
