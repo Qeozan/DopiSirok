@@ -22,14 +22,14 @@
       --accent-light: #b30022;
       
       /* Настройки темного стекла */
-      --glass-bg: rgba(10, 2, 4, 0.65);
-      --glass-border: rgba(138, 3, 29, 0.25);
-      --glass-border-top: rgba(255, 255, 255, 0.08);
-      --hover-border: rgba(180, 0, 30, 0.6);
+      --glass-bg: rgba(10, 2, 4, 0.9);
+      --glass-border: rgba(138, 3, 29, 0.35);
+      --glass-border-top: rgba(255, 255, 255, 0.1);
+      --hover-border: rgba(180, 0, 30, 0.8);
       
       /* Тени и мягкое свечение */
-      --soft-shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
-      --hover-glow: 0 10px 30px rgba(138, 3, 29, 0.4); 
+      --soft-shadow: 0 20px 40px rgba(0, 0, 0, 0.95);
+      --hover-glow: 0 10px 30px rgba(138, 3, 29, 0.5); 
     }
 
     html {
@@ -64,7 +64,7 @@
       content: '';
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
-      background: linear-gradient(180deg, rgba(3, 0, 1, 0) 0%, rgba(3, 0, 1, 0.6) 100%);
+      background: linear-gradient(180deg, rgba(3, 0, 1, 0.2) 0%, rgba(3, 0, 1, 0.8) 100%);
       z-index: -1;
       pointer-events: none;
     }
@@ -124,7 +124,7 @@
       overflow: visible;
     }
 
-    /* === СТЕКЛЯННЫЕ ПАНЕЛИ === */
+    /* === СТЕКЛЯННЫЕ ПАНЕЛИ (МЕНЕЕ ПРОЗРАЧНЫЕ) === */
     .glass-panel {
       border: 1px solid var(--glass-border);
       border-top: 1px solid var(--glass-border-top); 
@@ -141,19 +141,22 @@
       min-width: 300px;
       max-width: 380px;
       cursor: pointer;
-      overflow: hidden; 
+      /* ИСПРАВЛЕНИЕ: Убрали overflow: hidden; чтобы шапка не обрезалась */
+      overflow: visible; 
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       display: flex;
       flex-direction: column;
-      background: linear-gradient(145deg, rgba(30, 2, 8, 0.4) 0%, rgba(5, 0, 2, 0.6) 100%);
-      margin-top: 25px;
+      /* ИСПРАВЛЕНИЕ: Сделали фон почти непрозрачным для читаемости */
+      background: linear-gradient(145deg, rgba(12, 1, 3, 0.95) 0%, rgba(2, 0, 1, 0.98) 100%);
+      margin-top: 30px; /* Чуть увеличил отступ для шапки */
+      border-radius: 28px;
     }
 
     .card:hover {
       border-color: var(--hover-border);
       transform: translateY(-6px);
       box-shadow: var(--hover-glow);
-      background: rgba(25, 4, 8, 0.75); 
+      background: linear-gradient(145deg, rgba(20, 2, 5, 0.98) 0%, rgba(5, 0, 2, 1) 100%); 
     }
 
     /* === ШАПКИ КАРТОЧЕК === */
@@ -174,7 +177,7 @@
       letter-spacing: 0.1em;
       border-radius: 99px;
       border: 2px solid rgba(138, 3, 29, 0.5);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
     }
 
     .card-body {
@@ -266,7 +269,7 @@
       font-size: 34px;
       font-weight: 800;
       margin: 0;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+      text-shadow: 0 4px 20px rgba(0,0,0,0.9);
       line-height: 1.3;
     }
 
@@ -277,7 +280,7 @@
       align-items: stretch;
     }
 
-    /* Сетка для тактики (вспомогательный нижний ряд) */
+    /* Сетка для тактики */
     .tactics-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -285,7 +288,7 @@
       margin-top: 30px;
     }
 
-    /* Сетка для фракций (Вопрос 3) */
+    /* Сетка для фракций */
     .faction-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -297,7 +300,9 @@
       padding: 30px;
       height: 100%;
       transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
-      background: linear-gradient(145deg, rgba(30, 2, 8, 0.4) 0%, rgba(5, 0, 2, 0.6) 100%);
+      /* ИСПРАВЛЕНИЕ: Сделали фон почти непрозрачным для читаемости */
+      background: linear-gradient(145deg, rgba(12, 1, 3, 0.95) 0%, rgba(2, 0, 1, 0.98) 100%);
+      border-radius: 28px;
     }
 
     .detail-col:hover {
@@ -337,6 +342,7 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.8);
     }
 
+    /* === НОВАЯ НАВИГАЦИЯ I II III === */
     .detail-footer {
       display: flex;
       justify-content: space-between;
@@ -347,32 +353,67 @@
       border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .nav-btn {
-      background: rgba(10, 2, 4, 0.6);
-      color: var(--text);
+    .pagination {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-num-btn {
+      background: rgba(15, 2, 5, 0.95);
+      color: var(--muted);
       border: 1px solid var(--glass-border);
       border-top: 1px solid var(--glass-border-top);
-      border-radius: 16px;
-      padding: 12px 24px;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      border-radius: 12px;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.3s ease;
       backdrop-filter: blur(15px);
     }
 
-    .nav-btn:hover {
-      background: rgba(138, 3, 29, 0.3);
+    .nav-num-btn:hover {
+      background: rgba(138, 3, 29, 0.4);
+      color: #fff;
       border-color: var(--hover-border);
       box-shadow: var(--hover-glow);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
     }
 
-    .page-indicator {
+    .nav-num-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: #ff0033;
+      box-shadow: 0 0 15px rgba(138, 3, 29, 0.6);
+      pointer-events: none; /* Отключаем клик по текущей странице */
+    }
+
+    .footer-link {
+      color: var(--muted); 
+      text-decoration: none; 
+      font-size: 13px; 
+      text-transform: uppercase;
       font-weight: 600;
-      color: var(--muted);
       letter-spacing: 0.1em;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-link:hover {
+      color: #fff;
+    }
+    
+    .footer-link.accent {
+      color: var(--accent-light);
+    }
+    
+    .footer-link.accent:hover {
+      color: #ff0033;
     }
 
     /* === СТЕКЛЯННЫЙ ФУТЕР === */
@@ -383,6 +424,7 @@
       font-size: 14px;
       color: var(--muted);
       transition: border-color 0.4s ease;
+      background: linear-gradient(145deg, rgba(12, 1, 3, 0.95) 0%, rgba(2, 0, 1, 0.98) 100%);
     }
 
     .main-footer:hover {
@@ -431,7 +473,7 @@
       .card { width: 100%; max-width: 100%; }
       .detail-col { padding: 20px; }
       .footer-links { flex-direction: column; gap: 15px; }
-      .detail-footer { flex-direction: column; gap: 20px; text-align: center; }
+      .detail-footer { flex-direction: column; gap: 30px; text-align: center; }
     }
   </style>
 </head>
@@ -539,12 +581,13 @@
         </div>
 
         <div class="detail-footer">
-          <div class="page-indicator">Страница 1/3</div>
-          <div>
-            <button class="nav-btn" onclick="openQuestion(3)">❮ ПРЕДЫДУЩИЙ</button>
-            <button class="nav-btn" onclick="openQuestion(2)">СЛЕДУЮЩИЙ ❯</button>
+          <a href="#" onclick="goHome(event)" class="footer-link accent">❮ На главную</a>
+          <div class="pagination">
+            <button class="nav-num-btn active" onclick="openQuestion(1)">I</button>
+            <button class="nav-num-btn" onclick="openQuestion(2)">II</button>
+            <button class="nav-num-btn" onclick="openQuestion(3)">III</button>
           </div>
-          <a href="#" onclick="goHome(event)" style="color: var(--accent-light); text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
+          <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="footer-link">Наверх ⬆</a>
         </div>
       </div>
 
@@ -606,12 +649,13 @@
         </div>
 
         <div class="detail-footer">
-          <div class="page-indicator">Страница 2/3</div>
-          <div>
-            <button class="nav-btn" onclick="openQuestion(1)">❮ ПРЕДЫДУЩИЙ</button>
-            <button class="nav-btn" onclick="openQuestion(3)">СЛЕДУЮЩИЙ ❯</button>
+          <a href="#" onclick="goHome(event)" class="footer-link accent">❮ На главную</a>
+          <div class="pagination">
+            <button class="nav-num-btn" onclick="openQuestion(1)">I</button>
+            <button class="nav-num-btn active" onclick="openQuestion(2)">II</button>
+            <button class="nav-num-btn" onclick="openQuestion(3)">III</button>
           </div>
-          <a href="#" onclick="goHome(event)" style="color: var(--accent-light); text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
+          <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="footer-link">Наверх ⬆</a>
         </div>
       </div>
 
@@ -662,7 +706,7 @@
               <h3>ПОЛИЦЕЙСКИЙ ДЕПАРТАМЕНТ</h3>
               <ul class="card-list">
                  <li><strong>Подготовка кадров:</strong> Офицеры департамента (от звания Лейтенанта) сдают огневую и физическую подготовку на армейских полигонах.</li>
-                 <li><strong>Поддержка:</strong> Армия передает нарушителей патрульным и активно участвует в совместных операциях (включая рейды в гетто).</li>
+                 <li><strong>Поддержка:</strong> Армия передает нарушителей патрульным и активно участвует в совместных операций (включая рейды в гетто).</li>
                  <li><strong>Защита:</strong> При атаках на важные объекты оказывается поддержка спецназу (с разрешения Генерала).</li>
                  <li><strong>Следствие:</strong> Военная Полиция передает детективам материалы по зафиксированным военным преступлениям.</li>
               </ul>
@@ -697,12 +741,13 @@
         </div>
 
         <div class="detail-footer">
-          <div class="page-indicator">Страница 3/3</div>
-          <div>
-            <button class="nav-btn" onclick="openQuestion(2)">❮ ПРЕДЫДУЩИЙ</button>
-            <button class="nav-btn" onclick="goHome(event)">В НАЧАЛО ↻</button>
+          <a href="#" onclick="goHome(event)" class="footer-link accent">❮ На главную</a>
+          <div class="pagination">
+            <button class="nav-num-btn" onclick="openQuestion(1)">I</button>
+            <button class="nav-num-btn" onclick="openQuestion(2)">II</button>
+            <button class="nav-num-btn active" onclick="openQuestion(3)">III</button>
           </div>
-          <a href="#" onclick="goHome(event)" style="color: var(--accent-light); text-decoration: none; font-size: 14px; text-transform: uppercase;">К началу ⬆</a>
+          <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;" class="footer-link">Наверх ⬆</a>
         </div>
       </div>
 
