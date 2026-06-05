@@ -121,15 +121,14 @@
       flex-wrap: wrap;
       width: 100%;
       position: relative;
-      overflow: visible; /* Разрешаем заголовкам выходить за пределы карточек */
+      overflow: visible;
     }
 
-    /* === ОБНОВЛЕННЫЕ СТЕКЛЯННЫЕ ПАНЕЛИ (Less Glass, Less Blur) === */
+    /* === СТЕКЛЯННЫЕ ПАНЕЛИ === */
     .glass-panel {
       border: 1px solid var(--glass-border);
       border-top: 1px solid var(--glass-border-top); 
       border-radius: 28px;
-      /* Уменьшил размытие, чтобы выполнить требование "не настолько стеклянным" */
       backdrop-filter: blur(15px) saturate(120%); 
       -webkit-backdrop-filter: blur(15px) saturate(120%);
       box-shadow: var(--soft-shadow);
@@ -146,9 +145,8 @@
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       display: flex;
       flex-direction: column;
-      /* Увеличил непрозрачность градиента, чтобы карточки казались более плотными */
       background: linear-gradient(145deg, rgba(30, 2, 8, 0.4) 0%, rgba(5, 0, 2, 0.6) 100%);
-      margin-top: 25px; /* Освободил место для плавающего заголовка */
+      margin-top: 25px;
     }
 
     .card:hover {
@@ -158,32 +156,29 @@
       background: rgba(25, 4, 8, 0.75); 
     }
 
-    /* === ОБНОВЛЕННЫЕ ШАПКИ КАРТОЧЕК ( Floating Pills ) === */
+    /* === ШАПКИ КАРТОЧЕК === */
     .card-header {
-      /* Позиционирование заголовка поверх карточки, как на фото */
       position: absolute;
-      top: -18px; /* Выходит за пределы карточки вверх */
+      top: -18px;
       left: 50%;
       transform: translateX(-50%);
-      width: 90%; /* Почти на всю ширину карточки, как на фото */
+      width: 90%;
       z-index: 20;
-      
-      /* Стиль закругленного прямоугольника (пилюли) */
-      background: #1a040b; /* Темный бордовый/черный фон из топографии */
-      color: #ffffff; /* Белый тактический текст */
+      background: #1a040b;
+      color: #ffffff;
       font-weight: 700;
       text-align: center;
-      padding: 12px 10px; /* Узкие отступы пилюли */
-      font-size: 15px; /* Тот же тактический размер */
+      padding: 12px 10px;
+      font-size: 15px;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      border-radius: 99px; /* Полное закругление */
-      border: 2px solid rgba(138, 3, 29, 0.5); /* Тонкая бордовая граница, как на фото */
+      border-radius: 99px;
+      border: 2px solid rgba(138, 3, 29, 0.5);
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     }
 
     .card-body {
-      padding: 35px 20px 25px 20px; /* Увеличил верхний отступ для плавающего заголовка */
+      padding: 35px 20px 25px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -233,8 +228,6 @@
       margin-bottom: 4px;
     }
 
-    /* === УДАЛЕННЫЙ ТАЙМЕР (Удален из HTML) === */
-
     /* === ЭКРАН 2: ДЕТАЛЬНЫЙ ВОПРОС === */
     .detail-view {
       display: none;
@@ -280,15 +273,23 @@
     .detail-grid {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
-      gap: 40px;
-      align-items: center;
+      gap: 30px;
+      align-items: stretch;
     }
 
-    /* Детальные колонки со стеклом */
+    /* Дополнительная сетка для тактики (Вопрос 1) */
+    .tactics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
     .detail-col {
       padding: 30px;
       height: 100%;
       transition: border-color 0.4s ease, box-shadow 0.4s ease;
+      background: linear-gradient(145deg, rgba(30, 2, 8, 0.4) 0%, rgba(5, 0, 2, 0.6) 100%);
     }
 
     .detail-col:hover {
@@ -298,22 +299,25 @@
 
     .detail-col h3 {
       color: var(--text);
-      font-size: 20px;
+      font-size: 18px;
       margin-top: 0;
       text-transform: uppercase;
       border-bottom: 1px solid var(--glass-border);
       padding-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     .detail-col p {
       line-height: 1.6;
       color: #d1d1e0;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+      font-size: 14px;
     }
 
     .detail-center-img {
       width: 300px;
-      height: 350px;
+      height: 100%;
+      min-height: 350px;
       object-fit: cover;
       border-radius: 24px;
       border: 1px solid var(--glass-border);
@@ -407,13 +411,14 @@
     }
 
     @media (max-width: 900px) {
-      .detail-grid { grid-template-columns: 1fr; text-align: center; }
-      .detail-center-img { margin: 0 auto; width: 100%; max-width: 400px; }
+      .detail-grid { grid-template-columns: 1fr; text-align: left; }
+      .tactics-grid { grid-template-columns: 1fr; }
+      .detail-center-img { margin: 0 auto; width: 100%; max-width: 400px; height: auto; }
       .cards-wrapper { flex-direction: column; align-items: center; }
       .card { width: 100%; max-width: 100%; }
       .detail-col { padding: 20px; }
       .footer-links { flex-direction: column; gap: 15px; }
-      .detail-footer { flex-direction: column; gap: 20px; }
+      .detail-footer { flex-direction: column; gap: 20px; text-align: center; }
     }
   </style>
 </head>
@@ -459,28 +464,68 @@
         </div>
       </div>
 
-      </section>
+    </section>
 
     <section id="detailView" class="detail-view">
       
+      <!-- === ВОПРОС 1: ОБНОВЛЕННЫЙ БЛОК === -->
       <div id="q1" class="question-content" style="display: none;">
         <div class="detail-header">
           <h2>ОТВЕТЫ НА КЛЮЧЕВЫЕ ВОПРОСЫ</h2>
           <h1>1. Стратегия работы фракции<br>при начавшемся рейде авианосца</h1>
         </div>
+        
         <div class="detail-grid">
           <div class="detail-col glass-panel">
-            <h3>ОСНОВНОЙ ПЛАН</h3>
-            <p>Текст затычка. Описание первых действий руководящего состава при поступлении информации о рейде.</p>
+            <h3>РАСПРЕДЕЛЕНИЕ РОЛЕЙ</h3>
+            <p>Для эффективного отражения атаки и исключения хаоса, личный состав заранее делится на три профильные группы:</p>
+            <ul class="card-list" style="margin-bottom: 0;">
+              <li><strong>Спецотряд (СОА)</strong><br>Мозговой центр. Выдача снаряжения (оружие, газы, гранаты), аналитика угроз. Обучение стажеров контролю камер.</li>
+              <li><strong>Штурмовое (ШО)</strong><br>Авангард ближнего боя. Вооружение: дробовики и штурмовые винтовки. Задача: жесткое подавление противника.</li>
+              <li><strong>Стрелковое (СО)</strong><br>Элита дальнего боя (снайперы). Контроль периметра с вышек и огневое прикрытие штурмовиков.</li>
+            </ul>
           </div>
+          
           <div>
-            <img src="ГЛАВНОЕ_ФОТО_1.png" class="detail-center-img" alt="Фото вопрос 1">
+            <img src="image_8a1245.png" class="detail-center-img" alt="Фото вопрос 1">
           </div>
+          
           <div class="detail-col glass-panel">
-            <h3>КООРДИНАЦИЯ</h3>
-            <p>Текст затычка. Описание распределения огневых точек, запроса подкрепления и работы спец. отрядов.</p>
+            <h3>СВЯЗЬ И КООРДИНАЦИЯ</h3>
+            <p>В радиоэфире требуется строгая дисциплина. Для мгновенной оценки ситуации используются тен-коды:</p>
+            <ul class="card-list" style="margin-bottom: 0;">
+              <li><strong>А / С</strong><br>Авианосец и Склад соответственно.</li>
+              <li><strong>ЛМ / ПМ / ПР</strong><br>Левая матовая, Правая матовая, Промежуток.</li>
+              <li><strong>ВП / ЛФ</strong><br>Верхняя палуба и Лифты.</li>
+              <li><strong>ПК [число]</strong><br>Примерное количество нападающих ОПГ (например: "ПК 5" — врагов около пяти).</li>
+            </ul>
           </div>
         </div>
+
+        <div class="tactics-grid">
+          <div class="detail-col glass-panel">
+            <h3>ФАЗА СБОРА И ШТУРМ: ЛЕВЫЕ МАТЫ</h3>
+            <p>При тревоге состав стягивается к портам. Стрелки немедленно занимают высоты, штурмовики зачищают порты и продвигаются к кораблю. <strong>Тактика блокировки левых матов:</strong></p>
+            <ul class="card-list">
+              <li><strong>В лоб:</strong> Одновременный агрессивный заход с двух входов. Давим массой, не давая противнику опомниться.</li>
+              <li><strong>Вспышка:</strong> Бросок светошумовых. Моментальный пуш после хлопка, упаковка сдавшихся в карцер для передачи полиции.</li>
+              <li><strong>Газы:</strong> Внутрь летят газовые шашки. Личный состав заходит строго в противогазах, пользуясь дезориентацией врага.</li>
+            </ul>
+          </div>
+
+          <div class="detail-col glass-panel">
+            <h3>ШТУРМ: ПРАВЫЕ МАТЫ И ПРАВИЛА</h3>
+            <p>На открытых участках требуется хирургическая точность. Один штурмовик обязан контролировать лестницу на верхнюю палубу. <strong>Тактика на правых матах:</strong></p>
+            <ul class="card-list">
+              <li><strong>Котел:</strong> Окружение со всех сторон. Выдавливаем ОПГ на корму корабля прямо под перекрестный огонь наших снайперов.</li>
+              <li><strong>Вспышка / Газы:</strong> Тройной заброс гранат с разных точек для 100% покрытия. Газы используются для оттеснения врага вглубь перед основным штурмом.</li>
+            </ul>
+            <p style="margin-top: 20px; padding: 10px; background: rgba(138, 3, 29, 0.2); border-left: 3px solid var(--accent-light); border-radius: 4px; font-size: 13px;">
+              <strong>ВНИМАНИЕ:</strong> Единая форма на рейдах обязательна. Это критически важно для мгновенного опознавания своих и исключения дружественного огня.
+            </p>
+          </div>
+        </div>
+
         <div class="detail-footer">
           <div class="page-indicator">Страница 1/3</div>
           <div>
@@ -491,6 +536,7 @@
         </div>
       </div>
 
+      <!-- === ВОПРОС 2 === -->
       <div id="q2" class="question-content" style="display: none;">
         <div class="detail-header">
           <h2>ОТВЕТЫ НА КЛЮЧЕВЫЕ ВОПРОСЫ</h2>
@@ -519,6 +565,7 @@
         </div>
       </div>
 
+      <!-- === ВОПРОС 3 === -->
       <div id="q3" class="question-content" style="display: none;">
         <div class="detail-header">
           <h2>ОТВЕТЫ НА КЛЮЧЕВЫЕ ВОПРОСЫ</h2>
@@ -563,19 +610,14 @@
   <script>
     const heroView = document.getElementById('heroView');
     const detailView = document.getElementById('detailView');
-    /* ТАЙМЕР_ТЕКСТ ПОЛНОСТЬЮ УДАЛЕН ИЗ DOM */
     const allQuestions = document.querySelectorAll('.question-content');
     
     let timer;
     let timeLeft = 20;
 
-    // Функция автоперехода (Сохранена, но запуск закомментирован)
     function startTimer() {
       timer = setInterval(() => {
         timeLeft--;
-        /* if (timerText) {
-          timerText.innerHTML = `Переход к первому вопросу через: <b>${timeLeft}</b> сек`;
-        } */
         if (timeLeft <= 0) {
           clearInterval(timer);
           openQuestion(1);
@@ -583,9 +625,8 @@
       }, 1000);
     }
 
-    // Переход к конкретному вопросу
     function openQuestion(num) {
-      clearInterval(timer); // Очищаем таймер при ручном клике
+      clearInterval(timer); 
       
       heroView.classList.add('hide');
       setTimeout(() => {
@@ -602,7 +643,6 @@
       }, 500); 
     }
 
-    // Возврат на главный экран
     function goHome(e) {
       if(e) e.preventDefault();
       clearInterval(timer);
@@ -613,14 +653,9 @@
         setTimeout(() => heroView.classList.remove('hide'), 50);
         
         timeLeft = 20;
-        /* ТАЙМЕР УДАЛЕН ИЗ DOM */
-        startTimer(); // Перезапускаем таймер, если вернулись на главную (Но запуск закомментирован)
         window.scrollTo({ top: 0, behavior: "smooth" });
       }, 500);
     }
-
-    // === ЗАПУСК ТАЙМЕРА ПРИ ЗАГРУЗКЕ УБРАН (ЗАКОММЕНТИРОВАН) ===
-    /* window.onload = startTimer; */
   </script>
 </body>
 </html>
