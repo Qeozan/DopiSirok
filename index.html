@@ -211,13 +211,14 @@
     }
 
     .card-body {
-      padding: 30px 25px 20px 25px; /* Немного уменьшили отступы */
+      padding: 30px 25px 20px 25px; 
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 15px; /* Уменьшили gap */
+      gap: 15px; 
     }
 
+    /* === ИЗМЕНЕННЫЕ ФОТО В КАРТОЧКАХ (ШИРОКИЕ) === */
     .card-img {
       width: 100%; 
       height: 160px; 
@@ -228,6 +229,7 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.6);
     }
 
+    /* === СПИСКИ С НОВЫМ ДИЗАЙНОМ (ГРАДИЕНТЫ) === */
     .card-list {
       list-style: none;
       padding: 0;
@@ -237,28 +239,44 @@
 
     .card-list li {
       position: relative;
-      padding-left: 15px;
-      margin-bottom: 10px; /* Сильно уменьшили межстрочный интервал между пунктами */
+      padding-left: 20px; /* Увеличили отступ для линии и квадратика */
+      margin-bottom: 12px; 
       font-size: 13px;
-      line-height: 1.4; /* Сделали строки плотнее */
+      line-height: 1.5; 
       color: var(--muted);
     }
 
+    /* Градиентный квадратик (маркер заголовка) */
     .card-list li::before {
-      content: '■';
+      content: '';
       position: absolute;
       left: 0;
-      color: var(--accent-light);
-      font-size: 10px;
-      top: 3px;
-      text-shadow: 0 0 10px rgba(179, 0, 34, 0.5);
+      top: 5px; /* Центрируем по заголовку */
+      width: 8px;
+      height: 8px;
+      background: linear-gradient(135deg, var(--accent) 0%, #000000 100%);
+      box-shadow: 0 0 6px rgba(138, 3, 29, 0.6);
+      border-radius: 1px;
+    }
+
+    /* Вертикальная градиентная линия для описания */
+    .card-list li::after {
+      content: '';
+      position: absolute;
+      left: 3px; /* Идеально по центру 8px квадратика */
+      top: 22px; /* Начинается ровно под заголовком */
+      bottom: 2px; /* Идет до самого конца текста */
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent) 0%, #000000 100%);
+      border-radius: 2px;
+      opacity: 0.85; /* Слегка приглушили, чтобы не отвлекала от текста */
     }
 
     .card-list strong {
       display: block;
       color: #fff;
-      font-size: 14px; /* Чуть аккуратнее размер */
-      margin-bottom: 3px; /* Минимальный отступ от заголовка к тексту */
+      font-size: 14px; 
+      margin-bottom: 5px; /* Отступ от заголовка до описания */
     }
 
     /* === ЭКРАН 2: ДЕТАЛЬНЫЙ ВОПРОС === */
@@ -306,7 +324,7 @@
     .detail-grid {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
-      gap: 20px; /* Уменьшили gap сетки */
+      gap: 20px; 
       align-items: stretch;
     }
 
@@ -327,7 +345,7 @@
     }
 
     .detail-col {
-      padding: 25px; /* Сделали карточки компактнее */
+      padding: 25px; 
       height: 100%;
       transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
       background: linear-gradient(145deg, rgba(12, 1, 3, 0.95) 0%, rgba(2, 0, 1, 0.98) 100%);
@@ -349,12 +367,12 @@
       margin-top: 0;
       text-transform: uppercase;
       border-bottom: 1px solid var(--glass-border);
-      padding-bottom: 10px; /* Уменьшили отступ под заголовком */
+      padding-bottom: 10px; 
       margin-bottom: 15px;
     }
 
     .detail-col p {
-      line-height: 1.5; /* Сделали текст плотнее */
+      line-height: 1.5; 
       color: #d1d1e0;
       margin-bottom: 10px;
       font-size: 14px;
@@ -525,7 +543,6 @@
           <div class="card-body">
             <img src="https://i.imgur.com/FXTcOYL.png" alt="Затычка 1" class="card-img">
             <ul class="card-list">
-              <!-- УБРАНЫ <br>, текст теперь не скачет -->
               <li><strong>Полная стратегия</strong>Действия фракции при атаке.</li>
               <li><strong>Тактика обороны</strong>Координация состава.</li>
             </ul>
