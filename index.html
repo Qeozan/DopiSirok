@@ -46,24 +46,20 @@
       overflow-x: hidden; 
     }
 
-    /* === ТВОЙ НОВЫЙ ФОН ИЗ ИМГУРА === */
+    /* === ТВОЙ НОВЫЙ ФОН ИЗ ФАЙЛА === */
     body::before {
       content: '';
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background-image: url('https://i.imgur.com/heVlYqp.png'); 
-      
-      /* --- ИЗМЕНЕНИЯ ТУТ --- */
-      /* Ставим фиксированный размер. Если хочешь отдалить еще сильнее — пиши 800px или 600px */
-      background-size: 1000px; 
-      /* Зацикливаем текстуру, чтобы она повторялась во все стороны и не оставляла дыр */
-      background-repeat: repeat; 
+      /* Накладываем стильный бордовый градиент прямо поверх твоей картинки */
+      background-image: 
+        linear-gradient(rgba(60, 0, 15, 0.45), rgba(25, 0, 5, 0.7)),
+        url('https://i.imgur.com/elF7ohN.png'); 
+      background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
       z-index: -2;
       pointer-events: none;
-      
-      /* Легкое сглаживание, чтобы скрыть артефакты сжатия самой картинки */
-      filter: blur(0.5px); 
     }
 
     /* Легкое затемнение нижнего плана для читаемости текста */
