@@ -115,18 +115,16 @@
       display: inline-block; 
     }
 
-    /* Бордовая подпись с градиентом */
+    /* Бордовая неоновая подпись */
     .signature {
       position: absolute;
       font-family: 'Dancing Script', cursive;
       font-size: 46px;
       
-      /* Тот самый градиент, как у квадратиков */
       background: linear-gradient(135deg, var(--accent-light) 0%, #000000 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       
-      /* Свечение делаем через filter, чтобы оно корректно работало с градиентным текстом */
       filter: drop-shadow(0 0 8px rgba(179, 0, 34, 0.8));
       
       text-transform: none;
@@ -211,7 +209,7 @@
       gap: 15px; 
     }
 
-    /* === ИЗМЕНЕННЫЕ ФОТО В КАРТОЧКАХ (ШИРОКИЕ) === */
+    /* === ИЗМЕНЕННЫЕ ФОТО В КАРТОЧКАХ === */
     .card-img {
       width: 100%; 
       height: 160px; 
@@ -222,7 +220,7 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.6);
     }
 
-    /* === СПИСКИ С НОВЫМ ДИЗАЙНОМ (ГРАДИЕНТЫ) === */
+    /* === СПИСКИ === */
     .card-list {
       list-style: none;
       padding: 0;
@@ -232,19 +230,18 @@
 
     .card-list li {
       position: relative;
-      padding-left: 20px; /* Увеличили отступ для линии и квадратика */
+      padding-left: 20px;
       margin-bottom: 12px; 
       font-size: 13px;
       line-height: 1.5; 
       color: var(--muted);
     }
 
-    /* Градиентный квадратик (маркер заголовка) */
     .card-list li::before {
       content: '';
       position: absolute;
       left: 0;
-      top: 5px; /* Центрируем по заголовку */
+      top: 5px; 
       width: 8px;
       height: 8px;
       background: linear-gradient(135deg, var(--accent) 0%, #000000 100%);
@@ -252,24 +249,23 @@
       border-radius: 1px;
     }
 
-    /* Вертикальная градиентная линия для описания */
     .card-list li::after {
       content: '';
       position: absolute;
-      left: 3px; /* Идеально по центру 8px квадратика */
-      top: 22px; /* Начинается ровно под заголовком */
-      bottom: 2px; /* Идет до самого конца текста */
+      left: 3px; 
+      top: 22px; 
+      bottom: 2px; 
       width: 2px;
       background: linear-gradient(to bottom, var(--accent) 0%, #000000 100%);
       border-radius: 2px;
-      opacity: 0.85; /* Слегка приглушили, чтобы не отвлекала от текста */
+      opacity: 0.85; 
     }
 
     .card-list strong {
       display: block;
       color: #fff;
       font-size: 14px; 
-      margin-bottom: 5px; /* Отступ от заголовка до описания */
+      margin-bottom: 5px; 
     }
 
     /* === ЭКРАН 2: ДЕТАЛЬНЫЙ ВОПРОС === */
@@ -321,7 +317,6 @@
       align-items: stretch;
     }
 
-    /* Сетка для тактики */
     .tactics-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -329,7 +324,6 @@
       margin-top: 20px;
     }
 
-    /* Сетка для фракций */
     .faction-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -382,7 +376,6 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.8);
     }
 
-    /* === НОВАЯ НАВИГАЦИЯ I II III === */
     .detail-footer {
       display: flex;
       justify-content: space-between;
@@ -456,7 +449,6 @@
       color: #ff0033;
     }
 
-    /* === СТЕКЛЯННЫЙ ФУТЕР === */
     .main-footer {
       margin-top: auto;
       padding: 30px;
@@ -502,18 +494,6 @@
     .footer-links a:hover {
       color: #fff;
       text-shadow: 0 0 10px rgba(255,255,255,0.5);
-    }
-
-    @media (max-width: 900px) {
-      .detail-grid { grid-template-columns: 1fr; text-align: left; }
-      .tactics-grid { grid-template-columns: 1fr; }
-      .faction-grid { grid-template-columns: 1fr; }
-      .detail-center-img { margin: 0 auto; width: 100%; max-width: 400px; height: auto; }
-      .cards-wrapper { flex-direction: column; align-items: center; }
-      .card { width: 100%; max-width: 100%; }
-      .detail-col { padding: 20px; }
-      .footer-links { flex-direction: column; gap: 15px; }
-      .detail-footer { flex-direction: column; gap: 30px; text-align: center; }
     }
   </style>
 </head>
@@ -812,7 +792,7 @@
     const allQuestions = document.querySelectorAll('.question-content');
     
     let timer;
-    let timeLeft = 20;
+    let timeLeft = 15; // Таймер на 15 секунд
 
     function startTimer() {
       timer = setInterval(() => {
@@ -823,6 +803,9 @@
         }
       }, 1000);
     }
+
+    // Запуск при загрузке
+    window.onload = startTimer;
 
     function openQuestion(num) {
       clearInterval(timer); 
@@ -851,7 +834,8 @@
         heroView.style.display = 'flex';
         setTimeout(() => heroView.classList.remove('hide'), 50);
         
-        timeLeft = 20;
+        timeLeft = 15; // Сброс таймера
+        startTimer(); // Перезапуск таймера
         window.scrollTo({ top: 0, behavior: "smooth" });
       }, 500);
     }
