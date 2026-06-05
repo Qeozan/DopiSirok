@@ -46,15 +46,15 @@
       overflow-x: hidden; 
     }
 
-    /* === ТВОЙ БОРДОВЫЙ ФОН С ТОПОГРАФИЕЙ === */
+    /* === ТВОЙ НОВЫЙ ФОН ИЗ ИМГУРА === */
     body::before {
       content: '';
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background-image: url('coat_of_arms.png'), url('compass_lines.png'), url('topography.png'); 
-      background-size: 25% auto, 60% auto, cover;
-      background-position: center 30vh, center, center;
-      background-repeat: no-repeat, no-repeat, no-repeat;
+      background-image: url('https://i.imgur.com/heVlYqp.png'); 
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       z-index: -2;
       pointer-events: none;
     }
@@ -480,6 +480,7 @@
 
     <section id="detailView" class="detail-view">
       
+      <!-- === ВОПРОС 1 === -->
       <div id="q1" class="question-content" style="display: none;">
         <div class="detail-header">
           <h2>ОТВЕТЫ НА КЛЮЧЕВЫЕ ВОПРОСЫ</h2>
@@ -547,6 +548,7 @@
         </div>
       </div>
 
+      <!-- === ВОПРОС 2 === -->
       <div id="q2" class="question-content" style="display: none;">
         <div class="detail-header">
           <h2>ОТВЕТЫ НА КЛЮЧЕВЫЕ ВОПРОСЫ</h2>
@@ -613,12 +615,14 @@
         </div>
       </div>
 
+      <!-- === ВОПРОС 3 === -->
       <div id="q3" class="question-content" style="display: none;">
         <div class="detail-header">
           <h2>ОТВЕТЫ НА КЛЮЧЕВЫЕ ВОПРОСЫ</h2>
           <h1>3. Взаимодействие и полномочия армии<br>по отношению к гос. структурам</h1>
         </div>
         
+        <!-- Верхний блок с описанием самой Армии -->
         <div class="detail-grid" style="grid-template-columns: 1fr; margin-bottom: 30px;">
           <div class="detail-col glass-panel" style="text-align: center; padding: 40px;">
             <h3>СТАТУС И ПОЛНОМОЧИЯ АРМИИ</h3>
@@ -632,6 +636,7 @@
            <h2 style="color: var(--muted); font-size: 16px;">ВЗАИМОДЕЙСТВИЕ С ОРГАНИЗАЦИЯМИ</h2>
         </div>
 
+        <!-- Сетка с фракциями -->
         <div class="faction-grid">
            
            <div class="detail-col glass-panel">
